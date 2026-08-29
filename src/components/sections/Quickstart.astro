@@ -47,12 +47,12 @@ const table = [
     <div class="mt-12 overflow-x-auto">
       <table class="w-full min-w-[640px] border-separate border-spacing-0 text-sm">
         <thead>
-          <tr class="text-left text-xs uppercase tracking-widest text-gray-500">
-            <th class="py-4 px-3 font-medium border-b border-white/10"></th>
-            <th class="py-4 px-3 font-medium border-b border-white/10">Telescope</th>
-            <th class="py-4 px-3 font-medium border-b border-white/10">Pulse</th>
-            <th class="py-4 px-3 font-medium border-b border-white/10">APM</th>
-            <th class="py-4 px-4 font-semibold text-white bg-[#0F1115] border-x border-t-2 border-x-white/[0.08] border-t-brand-accent rounded-t-xl shadow-[0_-4px_16px_rgba(245,48,3,0.15)]">
+          <tr class="text-left text-xs uppercase tracking-wider">
+            <th class="py-4 px-3 font-medium text-gray-400 border-b border-white/10"></th>
+            <th class="py-4 px-3 font-semibold text-white border-b border-white/10 text-sm normal-case">Telescope</th>
+            <th class="py-4 px-3 font-semibold text-white border-b border-white/10 text-sm normal-case">Pulse</th>
+            <th class="py-4 px-3 font-semibold text-white border-b border-white/10 text-sm normal-case">APM</th>
+            <th class="py-4 px-4 font-bold text-white bg-[#0F1115] border-x border-t-2 border-x-white/[0.08] border-t-brand-accent rounded-t-xl shadow-[0_-4px_16px_rgba(245,48,3,0.15)] text-sm normal-case">
               Pinpoint
             </th>
           </tr>
@@ -100,20 +100,20 @@ const table = [
       {steps.map((s) => (
         <div class="group flex items-center justify-between gap-5 rounded-xl border border-white/[0.08] bg-[#0D0F12] p-4 sm:p-5 transition-all duration-200 hover:border-white/[0.16] hover:bg-[#111418]">
           <div class="flex items-center gap-4 sm:gap-5 min-w-0 flex-1">
-            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-brand-accent/25 bg-brand-accent/10 font-mono text-sm font-bold text-brand-accent">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-accent/10 font-mono text-sm font-bold text-brand-accent">
               {s.n}
             </div>
             <div class="min-w-0 flex-1 border-l border-white/10 pl-4 sm:pl-5">
               <p class="text-[11px] font-semibold uppercase tracking-widest text-gray-400">{s.label}</p>
               <div class="mt-1 flex items-center font-mono text-sm text-gray-100 overflow-x-auto">
-                <span class="mr-2 select-none text-brand-accent font-semibold">$</span>
+                <span class="mr-2.5 select-none font-medium text-gray-500">$</span>
                 <code class="truncate" set:html={s.html} />
               </div>
             </div>
           </div>
           <button
             data-step-copy={s.rawCmd}
-            class="flex items-center justify-center p-1.5 text-gray-500 transition-colors hover:text-white active:scale-95"
+            class="flex items-center justify-center p-1.5 text-gray-400 transition-colors hover:text-white active:scale-95"
             title="Copy command"
             aria-label={`Copy command: ${s.rawCmd}`}
           >
@@ -160,14 +160,18 @@ const table = [
           <p class="text-sm font-semibold text-white">Measured overhead</p>
           <p class="mt-1 text-sm text-brand-muted">Deferred flush keeps users off the critical path.</p>
         </div>
-        <div class="flex items-end gap-8">
-          <div class="text-center">
-            <p class="font-mono text-3xl font-semibold tabular-nums text-white">0.29<span class="text-sm text-gray-500">ms</span></p>
-            <p class="mt-1 text-xs text-brand-accent">Pinpoint</p>
+        <div class="flex items-center gap-10">
+          <div class="flex flex-col items-center">
+            <p class="font-mono text-3xl font-bold tabular-nums text-white">
+              0.29<span class="text-sm font-normal text-gray-400">ms</span>
+            </p>
+            <p class="mt-1.5 text-xs font-semibold tracking-wide text-brand-accent">Pinpoint</p>
           </div>
-          <div class="text-center">
-            <p class="font-mono text-3xl font-semibold text-gray-400">1420<span class="text-sm text-gray-600">ms</span></p>
-            <p class="mt-1 text-xs text-gray-500">api.orders.index</p>
+          <div class="flex flex-col items-center">
+            <p class="font-mono text-3xl font-normal tabular-nums text-gray-500">
+              1420<span class="text-sm text-gray-600">ms</span>
+            </p>
+            <p class="mt-1.5 text-xs font-normal tracking-wide text-gray-500">api.orders.index</p>
           </div>
         </div>
       </div>

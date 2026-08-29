@@ -95,22 +95,29 @@ export default function TerminalPreview() {
                 {routes.map((r, i) => {
                   const critical = r.status === 'Critical';
                   const expanded = open === i;
+                  const hasDetails = Boolean(r.pattern);
                   return (
                     <React.Fragment key={r.key}>
                       <button
-                        onClick={() => setOpen(expanded ? null : i)}
+                        onClick={() => hasDetails && setOpen(expanded ? null : i)}
                         className={`block w-full rounded-md text-left transition-colors ${
-                          expanded ? 'bg-white/[0.03]' : 'hover:bg-white/[0.02]'
+                          hasDetails
+                            ? expanded
+                              ? 'bg-white/[0.03]'
+                              : 'hover:bg-white/[0.02] cursor-pointer'
+                            : 'cursor-default'
                         }`}
                       >
                         <div className="grid grid-cols-[minmax(0,1.8fr)_85px_85px_120px_70px] sm:grid-cols-[minmax(0,2fr)_95px_95px_130px_75px] items-center gap-4 sm:gap-6 px-3 py-2.5">
                           <div className="flex min-w-0 items-center gap-1.5 font-mono text-sm font-medium text-white text-left">
                             <span className="truncate">{r.key}</span>
-                            <ChevronDown
-                              className={`h-3.5 w-3.5 -mt-0.5 shrink-0 text-gray-600 transition-transform duration-200 ${
-                                expanded ? 'rotate-180' : ''
-                              }`}
-                            />
+                            {hasDetails && (
+                              <ChevronDown
+                                className={`h-3.5 w-3.5 -mt-0.5 shrink-0 text-gray-600 transition-transform duration-200 ${
+                                  expanded ? 'rotate-180' : ''
+                                }`}
+                              />
+                            )}
                           </div>
                           <div className={`w-full text-right justify-self-end font-mono text-[13px] tabular-nums ${critical ? 'font-medium text-red-300' : 'text-gray-300'}`}>
                             {r.p95}
