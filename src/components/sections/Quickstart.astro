@@ -1,10 +1,26 @@
 ---
 import GlowMesh from '../ui/GlowMesh.astro';
+import { Copy } from 'lucide-react';
 
 const steps = [
-  { n: '01', cmd: 'composer require asimali/pinpoint --dev', label: 'Install as a dev dependency' },
-  { n: '02', cmd: 'php artisan vendor:publish --tag="pinpoint-migrations" && php artisan migrate', label: 'Publish & run migrations' },
-  { n: '03', cmd: 'php artisan pinpoint:report', label: 'Generate your first latency report' },
+  {
+    n: '01',
+    rawCmd: 'composer require asimali/pinpoint --dev',
+    label: 'Install as a dev dependency',
+    html: '<span class="text-brand-accent font-semibold">composer</span> require asimali/pinpoint <span class="text-gray-400">--dev</span>',
+  },
+  {
+    n: '02',
+    rawCmd: 'php artisan vendor:publish --tag="pinpoint-migrations" && php artisan migrate',
+    label: 'Publish & run migrations',
+    html: '<span class="text-brand-accent font-semibold">php artisan</span> vendor:publish <span class="text-gray-400">--tag="pinpoint-migrations"</span> <span class="text-brand-accent/80 font-bold">&amp;&amp;</span> <span class="text-brand-accent font-semibold">php artisan</span> migrate',
+  },
+  {
+    n: '03',
+    rawCmd: 'php artisan pinpoint:report',
+    label: 'Generate your first latency report',
+    html: '<span class="text-brand-accent font-semibold">php artisan</span> pinpoint:report',
+  },
 ];
 
 const table = [
@@ -21,36 +37,45 @@ const table = [
   <div class="mx-auto max-w-4xl px-4">
     <div class="max-w-2xl">
       <p class="text-sm font-medium uppercase tracking-[0.16em] text-brand-accent">Where Pinpoint differs</p>
-      <h2 class="mt-4 text-3xl font-semibold tracking-tight text-[#F5F5F5] sm:text-4xl">
-        Built around the Laravel runtime.
-      </h2>
-      <p class="mt-4 leading-7 text-[#A1A1AA]">
+      <h2 class="mt-4 text-3xl font-semibold tracking-tight text-brand-fg sm:text-4xl">Built around the Laravel runtime.</h2>
+      <p class="mt-4 leading-7 text-brand-muted">
         Pinpoint is for developers who want actionable runtime diagnostics without a heavyweight
         observability stack.
       </p>
     </div>
 
     <div class="mt-12 overflow-x-auto">
-      <table class="w-full min-w-[640px] border-collapse text-sm">
+      <table class="w-full min-w-[640px] border-separate border-spacing-0 text-sm">
         <thead>
-          <tr class="text-left text-xs uppercase tracking-wider text-gray-500">
-            <th class="p-3 font-medium"></th>
-            <th class="p-3 font-medium">Telescope</th>
-            <th class="p-3 font-medium">Pulse</th>
-            <th class="p-3 font-medium">APM</th>
-            <th class="p-3 bg-white/[0.03] font-semibold text-gray-300">Pinpoint</th>
+          <tr class="text-left text-xs uppercase tracking-widest text-gray-500">
+            <th class="py-4 px-3 font-medium border-b border-white/10"></th>
+            <th class="py-4 px-3 font-medium border-b border-white/10">Telescope</th>
+            <th class="py-4 px-3 font-medium border-b border-white/10">Pulse</th>
+            <th class="py-4 px-3 font-medium border-b border-white/10">APM</th>
+            <th class="py-4 px-4 font-semibold text-white bg-[#0F1115] border-x border-t-2 border-x-white/[0.08] border-t-brand-accent rounded-t-xl shadow-[0_-4px_16px_rgba(245,48,3,0.15)]">
+              Pinpoint
+            </th>
           </tr>
         </thead>
         <tbody>
-          {table.map((r) => (
-            <tr class="border-t border-white/[0.06]">
-              <td class="p-3 font-medium text-gray-300">{r.dim}</td>
-              <td class="p-3 text-gray-500">{r.t}</td>
-              <td class="p-3 text-gray-500">{r.p}</td>
-              <td class="p-3 text-gray-500">{r.a}</td>
-              <td class={`p-3 bg-white/[0.03] ${r.dAccent ? 'text-brand-accent' : 'text-gray-200'}`}>{r.d}</td>
-            </tr>
-          ))}
+          {table.map((r, idx) => {
+            const isLast = idx === table.length - 1;
+            return (
+              <tr>
+                <td class="py-4 px-3 font-medium text-gray-300 border-t border-white/[0.06]">{r.dim}</td>
+                <td class="py-4 px-3 text-gray-500 border-t border-white/[0.06]">{r.t}</td>
+                <td class="py-4 px-3 text-gray-500 border-t border-white/[0.06]">{r.p}</td>
+                <td class="py-4 px-3 text-gray-500 border-t border-white/[0.06]">{r.a}</td>
+                <td
+                  class={`py-4 px-4 bg-[#0F1115] text-white font-medium border-x border-x-white/[0.08] ${
+                    isLast ? 'rounded-b-xl border-b border-b-white/[0.08]' : ''
+                  }`}
+                >
+                  {r.d}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
@@ -67,23 +92,65 @@ const table = [
   <div class="relative z-10 mx-auto max-w-4xl px-4">
     <div class="mx-auto max-w-2xl text-center">
       <p class="text-sm font-medium uppercase tracking-[0.16em] text-brand-accent">04 / Documentation</p>
-      <h2 class="mt-4 text-3xl font-semibold tracking-tight text-[#F5F5F5] sm:text-4xl">Start profiling in minutes.</h2>
-      <p class="mt-4 leading-7 text-[#A1A1AA]">Three commands from zero to actionable latency insight.</p>
+      <h2 class="mt-4 text-3xl font-semibold tracking-tight text-brand-fg sm:text-4xl">Start profiling in minutes.</h2>
+      <p class="mt-4 leading-7 text-brand-muted">Three commands from zero to actionable latency insight.</p>
     </div>
 
     <div class="mt-14 space-y-3">
       {steps.map((s) => (
-        <div class="flex items-center gap-5 rounded-lg border border-brand-border bg-brand-card p-5">
-          <span class="font-mono text-sm text-gray-500">{s.n}</span>
-          <div class="min-w-0 flex-1">
-            <p class="text-xs uppercase tracking-wider text-gray-500">{s.label}</p>
-            <code class="mt-1 block truncate font-mono text-sm text-gray-200">{s.cmd}</code>
+        <div class="group flex items-center justify-between gap-5 rounded-xl border border-white/[0.08] bg-[#0D0F12] p-4 sm:p-5 transition-all duration-200 hover:border-white/[0.16] hover:bg-[#111418]">
+          <div class="flex items-center gap-4 sm:gap-5 min-w-0 flex-1">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-brand-accent/25 bg-brand-accent/10 font-mono text-sm font-bold text-brand-accent">
+              {s.n}
+            </div>
+            <div class="min-w-0 flex-1 border-l border-white/10 pl-4 sm:pl-5">
+              <p class="text-[11px] font-semibold uppercase tracking-widest text-gray-400">{s.label}</p>
+              <div class="mt-1 flex items-center font-mono text-sm text-gray-100 overflow-x-auto">
+                <span class="mr-2 select-none text-brand-accent font-semibold">$</span>
+                <code class="truncate" set:html={s.html} />
+              </div>
+            </div>
           </div>
+          <button
+            data-step-copy={s.rawCmd}
+            class="flex items-center justify-center p-1.5 text-gray-500 transition-colors hover:text-white active:scale-95"
+            title="Copy command"
+            aria-label={`Copy command: ${s.rawCmd}`}
+          >
+            <Copy data-icon-copy strokeWidth={1.5} class="h-4 w-4" />
+          </button>
         </div>
       ))}
     </div>
   </div>
 </section>
+
+<style>
+  button[data-step-copy][data-copied='true'] [data-icon-copy] {
+    color: theme('colors.brand.success');
+  }
+</style>
+
+<script>
+  function bindStepCopy() {
+    document.querySelectorAll<HTMLButtonElement>('[data-step-copy]').forEach((btn) => {
+      if (btn.dataset.bound) return;
+      btn.dataset.bound = 'true';
+      btn.addEventListener('click', async () => {
+        const text = btn.getAttribute('data-step-copy') || '';
+        try {
+          await navigator.clipboard.writeText(text);
+        } catch {}
+        btn.dataset.copied = 'true';
+        setTimeout(() => {
+          btn.dataset.copied = 'false';
+        }, 1600);
+      });
+    });
+  }
+  bindStepCopy();
+  document.addEventListener('astro:after-swap', bindStepCopy);
+</script>
 
 <section id="benchmarks" class="relative py-12">
   <div class="mx-auto max-w-4xl px-4">
@@ -91,7 +158,7 @@ const table = [
       <div class="flex flex-col items-center justify-between gap-6 sm:flex-row">
         <div>
           <p class="text-sm font-semibold text-white">Measured overhead</p>
-          <p class="mt-1 text-sm text-[#A1A1AA]">Deferred flush keeps users off the critical path.</p>
+          <p class="mt-1 text-sm text-brand-muted">Deferred flush keeps users off the critical path.</p>
         </div>
         <div class="flex items-end gap-8">
           <div class="text-center">

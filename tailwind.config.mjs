@@ -11,15 +11,19 @@ export default {
           'card-hover': '#121417',
           border: '#22252A',
           'border-active': '#2F3339',
-          accent: '#E3342F',
-          'accent-glow': 'rgba(227, 52, 47, 0.15)',
+          accent: '#F53003',
+          'accent-glow': 'rgba(245, 48, 3, 0.15)',
           muted: '#A1A1AA',
+          fg: '#F5F5F5',
+          success: '#3FB950',
+          warning: '#D29922',
         }
       },
       fontFamily: {
         sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         display: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
         mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+        instrument: ['"Instrument Sans"', 'InstrumentSans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       animation: {
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',

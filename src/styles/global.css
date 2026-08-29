@@ -4,9 +4,9 @@
 
 @layer base {
   body {
-    background-color: #08090B;
-    color: #F5F5F5;
-    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    background-color: theme('colors.brand.bg');
+    color: theme('colors.brand.fg');
+    font-family: 'DM Sans', 'Inter', ui-sans-serif, system-ui, sans-serif;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     overflow-x: hidden;
   }
@@ -15,6 +15,65 @@
     font-family: 'Plus Jakarta Sans', 'Inter', ui-sans-serif, system-ui, sans-serif;
     letter-spacing: -0.015em;
   }
+
+  button, .btn {
+    font-family: 'Instrument Sans', InstrumentSans, ui-sans-serif, system-ui, sans-serif;
+  }
+}
+
+.hero-scene {
+  filter: saturate(1.1);
+}
+
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+  animation: gridShift 18s linear infinite alternate;
+}
+
+.hero-radial {
+  background:
+    radial-gradient(circle at center, rgba(227, 52, 47, 0.2), rgba(227, 52, 47, 0.04) 20%, transparent 52%),
+    radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.14), transparent 32%),
+    radial-gradient(circle at 80% 30%, rgba(168, 85, 247, 0.12), transparent 26%);
+}
+
+.orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  opacity: 0.75;
+  animation: orbDrift 18s ease-in-out infinite alternate;
+}
+
+.orb-1 {
+  left: 18%;
+  top: 50px;
+  width: 340px;
+  height: 340px;
+  background: rgba(59, 130, 246, 0.18);
+}
+
+.orb-2 {
+  right: 16%;
+  top: 120px;
+  width: 420px;
+  height: 420px;
+  background: rgba(227, 52, 47, 0.16);
+  animation-delay: 2s;
+}
+
+.orb-3 {
+  left: 50%;
+  bottom: 10px;
+  width: 520px;
+  height: 220px;
+  transform: translateX(-50%);
+  background: rgba(168, 85, 247, 0.12);
+  animation-delay: 4s;
 }
 
 /* Glassmorphism & Micro-borders */
@@ -45,16 +104,35 @@
   height: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #08090B;
+  background: theme('colors.brand.bg');
 }
 ::-webkit-scrollbar-thumb {
-  background: #22252A;
+  background: theme('colors.brand.border');
   border-radius: 5px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #2F3339;
+  background: theme('colors.brand.border-active');
 }
 * {
-  scrollbar-color: #22252A #08090B;
+  scrollbar-color: theme('colors.brand.border') theme('colors.brand.bg');
   scrollbar-width: thin;
 }
+
+@keyframes orbDrift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.96);
+  }
+  100% {
+    transform: translate3d(24px, -18px, 0) scale(1.08);
+  }
+}
+
+@keyframes gridShift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(18px, 16px, 0) scale(1.03);
+  }
+}
+

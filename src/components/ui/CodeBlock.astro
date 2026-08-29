@@ -10,7 +10,7 @@ interface Props {
 const { code, class: className, filename } = Astro.props;
 ---
 
-<div class={cn('rounded-xl border border-white/10 bg-[#080B11] overflow-hidden', className)}>
+<div class={cn('rounded-xl border border-white/10 bg-brand-card overflow-hidden', className)}>
   {filename && (
     <div class="px-4 py-2 text-xs font-mono text-gray-500 border-b border-white/5 bg-white/[0.02]">
       {filename}

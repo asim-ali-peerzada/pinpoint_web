@@ -1,5 +1,6 @@
 ---
 import GlowMesh from '../ui/GlowMesh.astro';
+import { ArrowRight } from 'lucide-react';
 ---
 
 <section id="features" class="relative py-24">
@@ -7,10 +8,10 @@ import GlowMesh from '../ui/GlowMesh.astro';
   <div class="relative z-10 mx-auto max-w-5xl px-4">
     <div class="mx-auto max-w-2xl text-center">
       <p class="text-sm font-medium uppercase tracking-[0.16em] text-brand-accent">01 / Core Capabilities</p>
-      <h2 class="mt-4 text-3xl font-semibold tracking-tight text-[#F5F5F5] sm:text-4xl">
+      <h2 class="mt-4 text-3xl font-semibold tracking-tight text-brand-fg sm:text-4xl">
         Runtime visibility without the runtime tax.
       </h2>
-      <p class="mt-4 leading-7 text-[#A1A1AA]">
+      <p class="mt-4 leading-7 text-brand-muted">
         Pinpoint connects runtime signals to the code responsible for them.
       </p>
     </div>
@@ -23,10 +24,10 @@ import GlowMesh from '../ui/GlowMesh.astro';
             <span class="font-mono text-xs text-gray-500">01</span>
             <span class="uppercase tracking-[0.14em] text-gray-400">Detect</span>
           </p>
-          <h3 class="mt-3 text-xl font-semibold text-[#F5F5F5]">
+          <h3 class="mt-3 text-xl font-semibold text-brand-fg">
             N+1 and query anomalies
           </h3>
-          <p class="mt-3 text-sm leading-relaxed text-[#A1A1AA]">
+          <p class="mt-3 text-sm leading-relaxed text-brand-muted">
             Find repeated relationship queries before they become production bottlenecks.
             Uses Laravel's native lazy-loading signals, with SQL fingerprinting as a fallback.
           </p>
@@ -58,15 +59,15 @@ import GlowMesh from '../ui/GlowMesh.astro';
             <span class="font-mono text-xs text-gray-500">02</span>
             <span class="uppercase tracking-[0.14em] text-gray-400">Measure</span>
           </p>
-          <h3 class="mt-3 text-xl font-semibold text-[#F5F5F5]">
+          <h3 class="mt-3 text-xl font-semibold text-brand-fg">
             Route latency and runtime overhead
           </h3>
-          <p class="mt-3 text-sm leading-relaxed text-[#A1A1AA]">
+          <p class="mt-3 text-sm leading-relaxed text-brand-muted">
             Understand request performance without heavy tracing on the request path.
             Percentile rollups compute in the background, never inline.
           </p>
           <a href="#benchmarks" class="mt-5 inline-flex items-center gap-1 text-xs font-medium text-brand-accent hover:underline">
-            Overhead methodology →
+            Overhead methodology <ArrowRight class="h-3 w-3" />
           </a>
         </div>
 
@@ -104,10 +105,10 @@ import GlowMesh from '../ui/GlowMesh.astro';
             <span class="font-mono text-xs text-gray-500">03</span>
             <span class="uppercase tracking-[0.14em] text-gray-400">Locate</span>
           </p>
-          <h3 class="mt-3 text-xl font-semibold text-[#F5F5F5]">
+          <h3 class="mt-3 text-xl font-semibold text-brand-fg">
             Source-level context
           </h3>
-          <p class="mt-3 text-sm leading-relaxed text-[#A1A1AA]">
+          <p class="mt-3 text-sm leading-relaxed text-brand-muted">
             Move from a slow route directly to the responsible source. Diagnostics stay
             local — no telemetry pipeline, no hosted round trip.
           </p>

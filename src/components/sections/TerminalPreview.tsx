@@ -84,12 +84,12 @@ export default function TerminalPreview() {
           {/* Route table */}
           <div className="mt-4 overflow-x-auto">
             <div className="min-w-[520px]">
-              <div className="grid grid-cols-[minmax(0,1.8fr)_85px_85px_120px_70px] sm:grid-cols-[minmax(0,2fr)_95px_95px_130px_75px] items-center gap-4 sm:gap-6 px-3 pb-2 text-[11px] font-semibold uppercase tracking-wider text-gray-500">
-                <span>Route</span>
-                <span className="text-right">P95</span>
-                <span className="text-right">Avg</span>
-                <span className="text-center">Status</span>
-                <span className="text-right">N+1</span>
+              <div className="grid grid-cols-[minmax(0,1.8fr)_85px_85px_120px_70px] sm:grid-cols-[minmax(0,2fr)_95px_95px_130px_75px] items-center gap-4 sm:gap-6 px-3 pb-2 text-[11px] font-semibold uppercase tracking-widest text-gray-500">
+                <div className="text-left">Route</div>
+                <div className="w-full text-right justify-self-end">P95</div>
+                <div className="w-full text-right justify-self-end">Avg</div>
+                <div className="w-full text-center justify-self-center">Status</div>
+                <div className="w-full text-right justify-self-end">N+1</div>
               </div>
               <div className="divide-y divide-white/[0.05]">
                 {routes.map((r, i) => {
@@ -103,29 +103,29 @@ export default function TerminalPreview() {
                           expanded ? 'bg-white/[0.03]' : 'hover:bg-white/[0.02]'
                         }`}
                       >
-                        <span className="grid grid-cols-[minmax(0,1.8fr)_85px_85px_120px_70px] sm:grid-cols-[minmax(0,2fr)_95px_95px_130px_75px] items-center gap-4 sm:gap-6 px-3 py-2.5">
-                          <span className="flex min-w-0 items-center gap-1.5 text-sm font-medium text-white">
+                        <div className="grid grid-cols-[minmax(0,1.8fr)_85px_85px_120px_70px] sm:grid-cols-[minmax(0,2fr)_95px_95px_130px_75px] items-center gap-4 sm:gap-6 px-3 py-2.5">
+                          <div className="flex min-w-0 items-center gap-1.5 font-mono text-sm font-medium text-white text-left">
                             <span className="truncate">{r.key}</span>
                             <ChevronDown
-                              className={`h-3.5 w-3.5 shrink-0 text-gray-600 transition-transform duration-200 ${
+                              className={`h-3.5 w-3.5 -mt-0.5 shrink-0 text-gray-600 transition-transform duration-200 ${
                                 expanded ? 'rotate-180' : ''
                               }`}
                             />
-                          </span>
-                          <span className={`text-right font-mono text-[13px] tabular-nums ${critical ? 'font-medium text-red-300' : 'text-gray-300'}`}>
+                          </div>
+                          <div className={`w-full text-right justify-self-end font-mono text-[13px] tabular-nums ${critical ? 'font-medium text-red-300' : 'text-gray-300'}`}>
                             {r.p95}
-                          </span>
-                          <span className="text-right font-mono text-[13px] tabular-nums text-gray-400">
+                          </div>
+                          <div className="w-full text-right justify-self-end font-mono text-[13px] tabular-nums text-gray-400">
                             {r.avg}
-                          </span>
-                          <span className="flex items-center justify-center gap-1.5 text-[13px]">
+                          </div>
+                          <div className="flex w-full items-center justify-center gap-1.5 font-mono text-[13px] justify-self-center text-center">
                             <span className={`h-1.5 w-1.5 rounded-full shrink-0 ${critical ? 'bg-red-400' : 'bg-emerald-400'}`}></span>
                             <span className={critical ? 'font-medium text-red-300' : 'text-emerald-400'}>{r.status}</span>
-                          </span>
-                          <span className={`text-right font-mono text-[13px] tabular-nums ${critical ? 'font-medium text-red-300' : 'text-gray-500'}`}>
+                          </div>
+                          <div className={`w-full text-right justify-self-end font-mono text-[13px] tabular-nums ${critical ? 'font-medium text-red-300' : 'text-gray-500'}`}>
                             {r.dupes}
-                          </span>
-                        </span>
+                          </div>
+                        </div>
                       </button>
 
                     {expanded && r.pattern && (
