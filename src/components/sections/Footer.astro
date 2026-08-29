@@ -1,0 +1,46 @@
+---
+const links = [
+  { label: 'Architecture', href: '#architecture' },
+  { label: 'GitHub', href: 'https://github.com/asimali/pinpoint' },
+  { label: 'Packagist', href: 'https://packagist.org/packages/asimali/pinpoint' },
+  { label: 'MIT License', href: '/LICENSE' },
+  { label: 'Issue Tracker', href: 'https://github.com/asimali/pinpoint/issues' },
+];
+---
+
+<footer class="relative z-10 mt-24 border-t border-white/5 py-14">
+  <div class="mx-auto grid max-w-6xl gap-10 px-4 md:grid-cols-3">
+    <div>
+      <div class="flex items-center gap-2.5">
+        <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-accent/15 ring-1 ring-brand-accent/30">
+          <span class="h-2.5 w-2.5 rounded-sm bg-brand-accent"></span>
+        </div>
+        <span class="text-sm font-bold text-white">Pinpoint</span>
+      </div>
+      <p class="mt-4 max-w-xs text-sm text-gray-500">
+        Crafted for high-performance Laravel engineering teams.
+      </p>
+    </div>
+
+    <div>
+      <p class="text-xs uppercase tracking-wider text-gray-600">Resources</p>
+      <ul class="mt-4 space-y-2.5 text-sm">
+        {links.map((l) => (
+          <li>
+            <a href={l.href} class="text-gray-400 transition-colors hover:text-white">{l.label}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="text-sm text-gray-500 md:text-right">
+      Designed for Laravel 10, 11, and 12.
+      <br />
+      Built with <span class="text-gray-300">Astro</span> &amp; <span class="text-gray-300">Tailwind</span>.
+    </div>
+  </div>
+
+  <div class="mx-auto mt-10 max-w-6xl px-4 text-xs text-gray-600">
+    © {new Date().getFullYear()} Pinpoint. MIT Licensed.
+  </div>
+</footer>

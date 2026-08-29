@@ -1,0 +1,54 @@
+---
+import GlowMesh from '../ui/GlowMesh.astro';
+import InteractiveDemo from './InteractiveDemo.tsx';
+
+const rows = [
+  { dim: 'Primary Focus', a: 'General Debugger', b: 'Live Server Health', c: 'Deep Profiling', d: 'Route & N+1 Latency' },
+  { dim: 'Execution Context', a: 'Web Dashboard', b: 'Live Dashboard', c: 'Cloud SaaS', d: 'CLI & Native IDE' },
+  { dim: 'N+1 Precision', a: 'Manual Query Count', b: 'Aggregate Counts', c: 'Call Graph', d: 'Exact Model + Relation' },
+  { dim: 'Jump to Code', a: '❌', b: '❌', c: '❌', d: '✅ Exact File & Line' },
+  { dim: 'Data Retention Footprint', a: 'Heavy Payload', b: 'Short 24h Aggregates', c: 'External Cloud', d: 'Lightweight Raw / Summary' },
+  { dim: 'Production Impact', a: 'High', b: 'Low', c: 'Agent Overhead', d: '< 0.3ms (Deferred Flush)' },
+];
+---
+
+<section id="architecture" class="relative py-24">
+  <GlowMesh />
+  <div class="relative z-10 mx-auto max-w-6xl px-4">
+    <div class="mx-auto max-w-2xl text-center">
+      <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Why Pinpoint?</h2>
+      <p class="mt-4 text-gray-400">Clear boundaries against Telescope, Pulse, and Blackfire.</p>
+    </div>
+
+    <div class="mt-14 grid gap-8 lg:grid-cols-5">
+      <div class="lg:col-span-2">
+        <InteractiveDemo client:visible />
+      </div>
+
+      <div class="lg:col-span-3 overflow-x-auto">
+        <table class="w-full min-w-[640px] border-collapse text-sm">
+          <thead>
+            <tr class="text-left text-xs uppercase tracking-wider text-gray-500">
+              <th class="p-3 font-medium">Feature / Dimension</th>
+              <th class="p-3 font-medium">Telescope</th>
+              <th class="p-3 font-medium">Pulse</th>
+              <th class="p-3 font-medium">APM</th>
+              <th class="p-3 rounded-t-lg bg-brand-accent/10 font-semibold text-brand-accent">Pinpoint</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((r) => (
+              <tr class="border-t border-white/5">
+                <td class="p-3 font-medium text-gray-300">{r.dim}</td>
+                <td class="p-3 text-gray-400">{r.a}</td>
+                <td class="p-3 text-gray-400">{r.b}</td>
+                <td class="p-3 text-gray-400">{r.c}</td>
+                <td class="p-3 rounded-r-lg bg-brand-accent/[0.06] font-semibold text-white">{r.d}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
