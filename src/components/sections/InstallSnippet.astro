@@ -7,23 +7,23 @@ interface Props {
   class?: string;
 }
 
-const { command = 'composer require asimali/pinpoint --dev', class: className } = Astro.props;
+const { command = 'composer require asimali/pinpoint', class: className } = Astro.props;
 ---
 
 <div class={cn('group relative', className)}>
   <button
     data-install
-    class="flex h-11 w-full items-center gap-3 rounded-xl border border-white/10 bg-black/50 px-4 font-mono text-sm text-gray-200 transition-colors hover:border-brand-accent/40"
+    class="inline-flex items-center gap-2.5 rounded-lg border border-brand-border bg-black/40 px-4 py-2.5 font-mono text-sm text-gray-300 transition-colors hover:border-brand-border-active hover:text-white"
   >
     <span class="text-brand-accent">$</span>
-    <span class="flex-1 truncate whitespace-nowrap text-left">{command}</span>
-    <Copy data-icon-copy strokeWidth={1.5} class="h-3 w-3 text-gray-400 transition-all hover:text-white" />
+    <span class="truncate whitespace-nowrap">{command}</span>
+    <Copy data-icon-copy strokeWidth={1.5} class="h-3 w-3 text-gray-500 transition-colors hover:text-white" />
   </button>
 </div>
 
 <style>
   button[data-install][data-copied='true'] [data-icon-copy] {
-    color: #10B981;
+    color: #3FB950;
   }
 </style>
 

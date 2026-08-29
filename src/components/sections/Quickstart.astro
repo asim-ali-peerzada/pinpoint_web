@@ -6,22 +6,75 @@ const steps = [
   { n: '02', cmd: 'php artisan vendor:publish --tag="pinpoint-migrations" && php artisan migrate', label: 'Publish & run migrations' },
   { n: '03', cmd: 'php artisan pinpoint:report', label: 'Generate your first latency report' },
 ];
+
+const table = [
+  { dim: 'Focus', t: 'General debugger', p: 'Server health', a: 'Deep profiler', d: 'Route & N+1 latency', dAccent: false },
+  { dim: 'N+1 precision', t: 'Manual query counts', p: 'Aggregate counts', a: 'Call graph', d: 'Exact relation', dAccent: true },
+  { dim: 'Source location', t: '—', p: '—', a: '—', d: 'Exact file & line', dAccent: true },
+  { dim: 'Execution context', t: 'Web dashboard', p: 'Live dashboard', a: 'Cloud SaaS', d: 'CLI & native IDE', dAccent: false },
+  { dim: 'Telemetry residency', t: 'In-app', p: 'In-app', a: 'External', d: 'Local-only', dAccent: false },
+  { dim: 'Request overhead', t: 'High', p: 'Low', a: 'Varies', d: 'Benchmark-backed', dAccent: false },
+];
 ---
+
+<section id="diff" class="relative py-24">
+  <div class="mx-auto max-w-4xl px-4">
+    <div class="max-w-2xl">
+      <p class="text-sm font-medium uppercase tracking-[0.16em] text-brand-accent">Where Pinpoint differs</p>
+      <h2 class="mt-4 text-3xl font-semibold tracking-tight text-[#F5F5F5] sm:text-4xl">
+        Built around the Laravel runtime.
+      </h2>
+      <p class="mt-4 leading-7 text-[#A1A1AA]">
+        Pinpoint is for developers who want actionable runtime diagnostics without a heavyweight
+        observability stack.
+      </p>
+    </div>
+
+    <div class="mt-12 overflow-x-auto">
+      <table class="w-full min-w-[640px] border-collapse text-sm">
+        <thead>
+          <tr class="text-left text-xs uppercase tracking-wider text-gray-500">
+            <th class="p-3 font-medium"></th>
+            <th class="p-3 font-medium">Telescope</th>
+            <th class="p-3 font-medium">Pulse</th>
+            <th class="p-3 font-medium">APM</th>
+            <th class="p-3 bg-white/[0.03] font-semibold text-gray-300">Pinpoint</th>
+          </tr>
+        </thead>
+        <tbody>
+          {table.map((r) => (
+            <tr class="border-t border-white/[0.06]">
+              <td class="p-3 font-medium text-gray-300">{r.dim}</td>
+              <td class="p-3 text-gray-500">{r.t}</td>
+              <td class="p-3 text-gray-500">{r.p}</td>
+              <td class="p-3 text-gray-500">{r.a}</td>
+              <td class={`p-3 bg-white/[0.03] ${r.dAccent ? 'text-brand-accent' : 'text-gray-200'}`}>{r.d}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <p class="mt-6 text-xs text-gray-600">
+      Capabilities cross-referenced against current stable releases. Verify on your own stack —
+      that's the point.
+    </p>
+  </div>
+</section>
 
 <section id="docs" class="relative py-24">
   <GlowMesh />
   <div class="relative z-10 mx-auto max-w-4xl px-4">
     <div class="mx-auto max-w-2xl text-center">
-      <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Quickstart</h2>
-      <p class="mt-4 text-gray-400">Three commands from zero to actionable latency insight.</p>
+      <p class="text-sm font-medium uppercase tracking-[0.16em] text-brand-accent">04 / Documentation</p>
+      <h2 class="mt-4 text-3xl font-semibold tracking-tight text-[#F5F5F5] sm:text-4xl">Start profiling in minutes.</h2>
+      <p class="mt-4 leading-7 text-[#A1A1AA]">Three commands from zero to actionable latency insight.</p>
     </div>
 
-    <div class="mt-14 space-y-4">
+    <div class="mt-14 space-y-3">
       {steps.map((s) => (
-        <div class="glass-panel flex items-center gap-5 rounded-2xl p-5">
-          <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-accent/10 font-mono text-sm font-bold text-brand-accent ring-1 ring-brand-accent/30">
-            {s.n}
-          </span>
+        <div class="flex items-center gap-5 rounded-lg border border-brand-border bg-brand-card p-5">
+          <span class="font-mono text-sm text-gray-500">{s.n}</span>
           <div class="min-w-0 flex-1">
             <p class="text-xs uppercase tracking-wider text-gray-500">{s.label}</p>
             <code class="mt-1 block truncate font-mono text-sm text-gray-200">{s.cmd}</code>
@@ -34,19 +87,21 @@ const steps = [
 
 <section id="benchmarks" class="relative py-12">
   <div class="mx-auto max-w-4xl px-4">
-    <div class="glass-panel flex flex-col items-center justify-between gap-6 rounded-2xl p-8 sm:flex-row">
-      <div>
-        <p class="text-sm font-semibold text-white">Measured overhead on a typical route</p>
-        <p class="mt-1 text-sm text-gray-400">Deferred flush keeps your users off the critical path.</p>
-      </div>
-      <div class="flex items-end gap-8">
-        <div class="text-center">
-          <p class="font-mono text-3xl font-bold text-white">0.29<span class="text-sm text-gray-500">ms</span></p>
-          <p class="mt-1 text-xs text-brand-accent">Pinpoint</p>
+    <div class="rounded-lg border border-brand-border bg-brand-card p-8">
+      <div class="flex flex-col items-center justify-between gap-6 sm:flex-row">
+        <div>
+          <p class="text-sm font-semibold text-white">Measured overhead</p>
+          <p class="mt-1 text-sm text-[#A1A1AA]">Deferred flush keeps users off the critical path.</p>
         </div>
-        <div class="text-center">
-          <p class="font-mono text-3xl font-bold text-gray-400">1420<span className="text-sm text-gray-600">ms</span></p>
-          <p class="mt-1 text-xs text-gray-500">api.orders.index</p>
+        <div class="flex items-end gap-8">
+          <div class="text-center">
+            <p class="font-mono text-3xl font-semibold tabular-nums text-white">0.29<span class="text-sm text-gray-500">ms</span></p>
+            <p class="mt-1 text-xs text-brand-accent">Pinpoint</p>
+          </div>
+          <div class="text-center">
+            <p class="font-mono text-3xl font-semibold text-gray-400">1420<span class="text-sm text-gray-600">ms</span></p>
+            <p class="mt-1 text-xs text-gray-500">api.orders.index</p>
+          </div>
         </div>
       </div>
     </div>

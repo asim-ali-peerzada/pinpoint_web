@@ -6,14 +6,14 @@ export default {
     extend: {
       colors: {
         brand: {
-          bg: '#06080D',
-          card: '#0D111A',
-          'card-hover': '#151B28',
-          border: 'rgba(255, 255, 255, 0.08)',
-          'border-active': 'rgba(255, 255, 255, 0.16)',
-          accent: '#FF2D20',
-          'accent-glow': 'rgba(255, 45, 32, 0.15)',
-          muted: '#8B949E',
+          bg: '#08090B',
+          card: '#0D0F12',
+          'card-hover': '#121417',
+          border: '#22252A',
+          'border-active': '#2F3339',
+          accent: '#E3342F',
+          'accent-glow': 'rgba(227, 52, 47, 0.15)',
+          muted: '#A1A1AA',
         }
       },
       fontFamily: {
