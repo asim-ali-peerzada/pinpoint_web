@@ -41,8 +41,8 @@ import { ArrowRight, ChevronDown } from 'lucide-react';
     </div>
 
     <!-- Verified Trust & Status Strip (Linked to live CI & repo) -->
-    <div class="mt-6 flex justify-center">
-      <div class="inline-flex flex-wrap items-center justify-center gap-3 sm:gap-4 rounded-full border border-white/10 bg-[#0C0E12]/95 px-4 py-1.5 shadow-[0_4px_24px_rgba(0,0,0,0.5)] backdrop-blur-md text-xs font-mono">
+    <div class="mt-6 flex justify-center px-4">
+      <div class="inline-flex items-center justify-center whitespace-nowrap gap-2 sm:gap-3.5 rounded-full border border-white/10 bg-[#0C0E12]/95 px-3 py-1.5 sm:px-4 shadow-[0_4px_24px_rgba(0,0,0,0.5)] backdrop-blur-md text-[11px] sm:text-xs font-mono">
         <a
           href="https://github.com/asim-ali-peerzada/pinpoint/actions/workflows/run-tests.yml"
           target="_blank"
@@ -50,23 +50,23 @@ import { ArrowRight, ChevronDown } from 'lucide-react';
           class="flex items-center gap-1.5 text-gray-300 hover:text-white transition-colors"
         >
           <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
-          Tests Passing
+          <span class="hidden sm:inline">Tests </span>Passing
         </a>
-        <span class="hidden sm:inline-block h-1 w-1 rounded-full bg-gray-600"></span>
+        <span class="h-1 w-1 rounded-full bg-gray-600/80"></span>
         <span class="flex items-center gap-1.5 text-gray-300">
           <span class="h-1.5 w-1.5 rounded-full bg-sky-400"></span>
-          PHPStan Level 5
+          PHPStan <span class="hidden sm:inline">Level </span>5
         </span>
-        <span class="hidden sm:inline-block h-1 w-1 rounded-full bg-gray-600"></span>
+        <span class="h-1 w-1 rounded-full bg-gray-600/80"></span>
         <span class="text-gray-300">Laravel 12–13</span>
-        <span class="hidden sm:inline-block h-1 w-1 rounded-full bg-gray-600"></span>
+        <span class="h-1 w-1 rounded-full bg-gray-600/80"></span>
         <a
           href="https://github.com/asim-ali-peerzada/pinpoint/blob/main/LICENSE"
           target="_blank"
           rel="noopener noreferrer"
           class="text-gray-400 hover:text-gray-200 transition-colors"
         >
-          MIT License
+          MIT<span class="hidden sm:inline"> License</span>
         </a>
       </div>
     </div>

@@ -117,6 +117,14 @@
   scrollbar-width: thin;
 }
 
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 @keyframes orbDrift {
   0% {
     transform: translate3d(0, 0, 0) scale(0.96);
