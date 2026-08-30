@@ -5,7 +5,7 @@ import TerminalPreview from './TerminalPreview.tsx';
 import InstallSnippet from './InstallSnippet.astro';
 import { ArrowRight } from 'lucide-react';
 
-const meta = ['Laravel 10–13', 'PHP 8.2+', 'MySQL', 'PostgreSQL', 'Local-first'];
+const meta = ['Laravel 12–13', 'PHP 8.2+', 'MySQL', 'PostgreSQL', 'Local-first'];
 ---
 
 <section class="relative overflow-hidden pt-36 pb-20 sm:pt-44">
@@ -29,7 +29,12 @@ const meta = ['Laravel 10–13', 'PHP 8.2+', 'MySQL', 'PostgreSQL', 'Local-first
 
     <div class="mx-auto mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
       <Button href="#docs">Get started <span class="transition-transform duration-200 group-hover:translate-x-0.5">→</span></Button>
-      <Button href="#docs" variant="secondary">Read the documentation</Button>
+      <Button
+        href="https://github.com/asim-ali-peerzada/pinpoint#readme"
+        target="_blank"
+        rel="noopener"
+        variant="secondary"
+      >Read the documentation</Button>
     </div>
 
     <div class="mt-4 flex justify-center">
@@ -37,7 +42,7 @@ const meta = ['Laravel 10–13', 'PHP 8.2+', 'MySQL', 'PostgreSQL', 'Local-first
     </div>
 
     <div class="mx-auto mt-20 max-w-5xl">
-      <TerminalPreview client:visible />
+      <TerminalPreview client:load />
     </div>
 
     <div class="mx-auto mt-12 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
@@ -53,8 +58,9 @@ const meta = ['Laravel 10–13', 'PHP 8.2+', 'MySQL', 'PostgreSQL', 'Local-first
 
     <div class="mx-auto mt-10 max-w-md text-center">
       <p class="text-[11px] uppercase tracking-[0.16em] text-gray-400">Measured overhead</p>
-      <p class="mt-1 flex items-center justify-center gap-2 text-sm text-gray-300">
-        <span class="font-mono">0.29ms median</span>
+      <p class="mt-1 flex items-center justify-center gap-2 text-sm">
+        <span class="font-mono font-medium text-brand-fg">0.29<span class="text-gray-500">ms</span></span>
+        <span class="text-brand-muted">mean</span>
         <a href="#benchmarks" class="inline-flex items-center gap-1 font-sans font-medium text-brand-accent hover:underline">
           View benchmarks <ArrowRight class="h-4 w-4" />
         </a>

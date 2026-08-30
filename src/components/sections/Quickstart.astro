@@ -1,5 +1,4 @@
 ---
-import GlowMesh from '../ui/GlowMesh.astro';
 import { Copy } from 'lucide-react';
 
 const steps = [
@@ -88,7 +87,6 @@ const table = [
 </section>
 
 <section id="docs" class="relative py-24">
-  <GlowMesh />
   <div class="relative z-10 mx-auto max-w-4xl px-4">
     <div class="mx-auto max-w-2xl text-center">
       <p class="text-sm font-medium uppercase tracking-[0.16em] text-brand-accent">04 / Documentation</p>
@@ -117,7 +115,7 @@ const table = [
             title="Copy command"
             aria-label={`Copy command: ${s.rawCmd}`}
           >
-            <Copy data-icon-copy strokeWidth={1.5} class="h-4 w-4" />
+            <Copy data-icon-copy strokeWidth={1.5} class="h-3 w-3" />
           </button>
         </div>
       ))}
@@ -154,7 +152,7 @@ const table = [
 
 <section id="benchmarks" class="relative py-12">
   <div class="mx-auto max-w-4xl px-4">
-    <div class="rounded-lg border border-brand-border bg-brand-card p-8">
+    <div class="rounded-lg border border-brand-border bg-brand-card px-6 py-8 md:px-8">
       <div class="flex flex-col items-center justify-between gap-6 sm:flex-row">
         <div>
           <p class="text-sm font-semibold text-white">Measured overhead</p>
@@ -162,16 +160,16 @@ const table = [
         </div>
         <div class="flex items-center gap-10">
           <div class="flex flex-col items-center">
-            <p class="font-mono text-3xl font-bold tabular-nums text-white">
-              0.29<span class="text-sm font-normal text-gray-400">ms</span>
+            <p class="font-mono text-3xl font-bold tabular-nums text-brand-fg">
+              0.29<span class="text-sm font-normal text-gray-500">ms</span>
             </p>
             <p class="mt-1.5 text-xs font-semibold tracking-wide text-brand-accent">Pinpoint</p>
           </div>
           <div class="flex flex-col items-center">
-            <p class="font-mono text-3xl font-normal tabular-nums text-gray-500">
+            <p class="font-mono text-3xl font-normal tabular-nums text-gray-400">
               1420<span class="text-sm text-gray-600">ms</span>
             </p>
-            <p class="mt-1.5 text-xs font-normal tracking-wide text-gray-500">api.orders.index</p>
+            <p class="mt-1.5 text-xs font-normal tracking-wide text-gray-400">api.orders.index</p>
           </div>
         </div>
       </div>

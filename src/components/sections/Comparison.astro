@@ -1,14 +1,12 @@
 ---
-import GlowMesh from '../ui/GlowMesh.astro';
 import InteractiveDemo from './InteractiveDemo.tsx';
 import { ArrowRight } from 'lucide-react';
 ---
 
 <section id="architecture" class="relative py-24">
-  <GlowMesh />
   <div class="relative z-10 mx-auto max-w-5xl px-4">
     <div class="mx-auto max-w-2xl text-center">
-      <p class="text-sm font-medium uppercase tracking-[0.16em] text-brand-accent">03 / Diagnostic Workflow</p>
+      <p class="text-sm font-medium uppercase tracking-[0.16em] text-brand-accent">        02 / Diagnostic Workflow</p>
       <h2 class="mt-4 text-3xl font-semibold tracking-tight text-brand-fg sm:text-4xl">
         From runtime signal to source line.
       </h2>
@@ -18,7 +16,7 @@ import { ArrowRight } from 'lucide-react';
     </div>
 
     <div class="mt-14">
-      <InteractiveDemo client:visible />
+      <InteractiveDemo client:load />
     </div>
 
     <p class="mt-6 text-center text-xs text-gray-600">
