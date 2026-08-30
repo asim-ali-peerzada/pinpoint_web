@@ -8,9 +8,9 @@ import { execSync } from 'node:child_process';
 let version = 'latest release';
 
 try {
-    version = execSync('git describe --tags --abbrev=0', { cwd: new URL('../../../..', import.meta.url).pathname })
-        .toString()
-        .trim();
+    // web/ is its own git repo; the package tags live in the parent repo, so
+    // describe from the checkout root (web's parent).
+    version = execSync('git -C ../ describe --tags --abbrev=0').toString().trim();
 } catch {
     // not in a git checkout — keep the neutral fallback
 }
