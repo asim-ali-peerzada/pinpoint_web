@@ -25,12 +25,14 @@ const steps = [
 ];
 
 const table = [
-  { dim: 'Primary focus', d: 'Route & N+1 latency', t: 'General debug assistant', p: 'Server health & queues', a: 'Distributed APM profiling' },
-  { dim: 'N+1 query precision', d: 'Exact relation & model', t: 'Manual query count logs', p: 'Aggregate slow query list', a: 'Call tree & span waterfall' },
-  { dim: 'Source line traceback', d: 'Exact file and line', t: 'Backtrace in web modal', p: '—', a: 'Stack trace on slow span' },
-  { dim: 'Execution environment', d: 'CLI and native IDE', t: 'Local web dashboard', p: 'Central web dashboard', a: 'Cloud SaaS interface' },
-  { dim: 'Telemetry residency', d: 'Local machine only', t: 'In-app database', p: 'Redis / app database', a: 'External third-party cloud' },
-  { dim: 'Request overhead', d: '0.29ms mean (deferred)', t: 'High (inline event recording)', p: 'Low (sampled)', a: 'Medium–High (agent tracing)' },
+  { dim: 'Primary focus', d: 'Route & N+1 latency', t: 'General debug assistant', p: 'Server health & queues', s: 'Slow queries + AI fixes' },
+  { dim: 'CI regression gate', d: 'Yes — blocks PR before merge', t: '—', p: '—', s: '—' },
+  { dim: 'Fix guidance', d: 'Exact eager-load fix (deterministic, free)', t: 'Raw query view only', p: 'Aggregate metrics only', s: 'AI-generated: indexes, rewrites, eager-loads' },
+  { dim: 'N+1 query precision', d: 'Exact relation & model (Eloquent hook)', t: 'Manual query count logs', p: 'Aggregate slow query list', s: 'Duration-threshold + fingerprint grouping' },
+  { dim: 'Source line traceback', d: 'Exact file and line', t: 'Backtrace in web modal', p: '—', s: 'Exact file and line' },
+  { dim: 'Execution environment', d: 'CLI and native IDE', t: 'Local web dashboard', p: 'Central web dashboard', s: 'Self-hosted dashboard (/slower)' },
+  { dim: 'Telemetry residency', d: 'Local machine only', t: 'In-app database', p: 'Redis / app database', s: 'Local by default; SQL/schema to LLM on demand' },
+  { dim: 'Request overhead', d: '0.29ms mean (deferred)', t: 'High (inline recording)', p: 'Low (sampled)', s: 'Threshold-gated; sampling + circuit breaker' },
 ];
 ---
 
@@ -64,7 +66,7 @@ const table = [
               </th>
               <th class="py-4 px-3 font-semibold text-white border-b border-white/10 text-sm normal-case">Telescope</th>
               <th class="py-4 px-3 font-semibold text-white border-b border-white/10 text-sm normal-case">Pulse</th>
-              <th class="py-4 px-3 font-semibold text-white border-b border-white/10 text-sm normal-case">APM</th>
+              <th class="py-4 px-3 font-semibold text-white border-b border-white/10 text-sm normal-case">Laravel Slower</th>
             </tr>
           </thead>
           <tbody>
@@ -83,7 +85,7 @@ const table = [
                   </td>
                   <td class="py-4 px-3 text-gray-400 border-t border-white/[0.06]">{r.t}</td>
                   <td class="py-4 px-3 text-gray-400 border-t border-white/[0.06]">{r.p}</td>
-                  <td class="py-4 px-3 text-gray-400 border-t border-white/[0.06]">{r.a}</td>
+                  <td class="py-4 px-3 text-gray-400 border-t border-white/[0.06]">{r.s}</td>
                 </tr>
               );
             })}
