@@ -1,4 +1,5 @@
 ---
+import GlowMesh from '../ui/GlowMesh.astro';
 import { Copy } from 'lucide-react';
 
 const steps = [
@@ -23,17 +24,17 @@ const steps = [
 ];
 
 const table = [
-  { dim: 'Focus', t: 'General debugger', p: 'Server health', a: 'Deep profiler', d: 'Route & N+1 latency', dAccent: false },
-  { dim: 'N+1 precision', t: 'Manual query counts', p: 'Aggregate counts', a: 'Call graph', d: 'Exact relation', dAccent: true },
-  { dim: 'Source location', t: '—', p: '—', a: '—', d: 'Exact file & line', dAccent: true },
-  { dim: 'Execution context', t: 'Web dashboard', p: 'Live dashboard', a: 'Cloud SaaS', d: 'CLI & native IDE', dAccent: false },
-  { dim: 'Telemetry residency', t: 'In-app', p: 'In-app', a: 'External', d: 'Local-only', dAccent: false },
-  { dim: 'Request overhead', t: 'High', p: 'Low', a: 'Varies', d: 'Benchmark-backed', dAccent: false },
+  { dim: 'Focus', d: 'Route & N+1 latency', t: 'General debugger', p: 'Server health', a: 'Deep profiler' },
+  { dim: 'N+1 precision', d: 'Exact relation', t: 'Manual query counts', p: 'Aggregate counts', a: 'Call graph' },
+  { dim: 'Source location', d: 'Exact file & line', t: '—', p: '—', a: '—' },
+  { dim: 'Execution context', d: 'CLI & native IDE', t: 'Web dashboard', p: 'Live dashboard', a: 'Cloud SaaS' },
+  { dim: 'Telemetry residency', d: 'Local-only', t: 'In-app', p: 'In-app', a: 'External' },
+  { dim: 'Request overhead', d: 'Benchmark-backed', t: 'High', p: 'Low', a: 'Varies' },
 ];
 ---
 
 <section id="diff" class="relative py-24">
-  <div class="mx-auto max-w-4xl px-4">
+  <div class="mx-auto max-w-5xl px-4 sm:px-6">
     <div class="max-w-2xl">
       <p class="text-sm font-medium uppercase tracking-[0.16em] text-brand-accent">Where Pinpoint differs</p>
       <h2 class="mt-4 text-3xl font-semibold tracking-tight text-brand-fg sm:text-4xl">Built around the Laravel runtime.</h2>
@@ -43,40 +44,51 @@ const table = [
       </p>
     </div>
 
-    <div class="mt-12 overflow-x-auto">
-      <table class="w-full min-w-[640px] border-separate border-spacing-0 text-sm">
-        <thead>
-          <tr class="text-left text-xs uppercase tracking-wider">
-            <th class="py-4 px-3 font-medium text-gray-400 border-b border-white/10"></th>
-            <th class="py-4 px-3 font-semibold text-white border-b border-white/10 text-sm normal-case">Telescope</th>
-            <th class="py-4 px-3 font-semibold text-white border-b border-white/10 text-sm normal-case">Pulse</th>
-            <th class="py-4 px-3 font-semibold text-white border-b border-white/10 text-sm normal-case">APM</th>
-            <th class="py-4 px-4 font-bold text-white bg-[#0F1115] border-x border-t-2 border-x-white/[0.08] border-t-brand-accent rounded-t-xl shadow-[0_-4px_16px_rgba(245,48,3,0.15)] text-sm normal-case">
-              Pinpoint
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {table.map((r, idx) => {
-            const isLast = idx === table.length - 1;
-            return (
-              <tr>
-                <td class="py-4 px-3 font-medium text-gray-300 border-t border-white/[0.06]">{r.dim}</td>
-                <td class="py-4 px-3 text-gray-500 border-t border-white/[0.06]">{r.t}</td>
-                <td class="py-4 px-3 text-gray-500 border-t border-white/[0.06]">{r.p}</td>
-                <td class="py-4 px-3 text-gray-500 border-t border-white/[0.06]">{r.a}</td>
-                <td
-                  class={`py-4 px-4 bg-[#0F1115] text-white font-medium border-x border-x-white/[0.08] ${
-                    isLast ? 'rounded-b-xl border-b border-b-white/[0.08]' : ''
-                  }`}
-                >
-                  {r.d}
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+    <!-- Comparison Table Container with Mobile Scroll-Snap -->
+    <div class="relative mt-12">
+      <!-- Mobile Swipe Hint -->
+      <div id="table-swipe-hint" class="flex sm:hidden items-center justify-end gap-1.5 pb-2 text-[11px] font-mono text-brand-accent animate-pulse">
+        <span>Swipe to compare</span>
+        <span>→</span>
+      </div>
+
+      <div id="table-scroll-container" class="overflow-x-auto scroll-smooth snap-x snap-mandatory rounded-xl">
+        <table class="w-full min-w-[640px] border-separate border-spacing-0 text-sm">
+          <thead>
+            <tr class="text-left text-xs uppercase tracking-wider">
+              <th class="py-4 px-3 font-medium text-gray-400 border-b border-white/10"></th>
+              <!-- Pinpoint First (Highlighted Column) -->
+              <th class="py-4 px-4 font-bold text-white bg-[#0F1115] border-x border-t-2 border-x-white/[0.08] border-t-brand-accent rounded-t-xl shadow-[0_-4px_16px_rgba(245,48,3,0.15)] text-sm normal-case">
+                Pinpoint
+              </th>
+              <th class="py-4 px-3 font-semibold text-white border-b border-white/10 text-sm normal-case">Telescope</th>
+              <th class="py-4 px-3 font-semibold text-white border-b border-white/10 text-sm normal-case">Pulse</th>
+              <th class="py-4 px-3 font-semibold text-white border-b border-white/10 text-sm normal-case">APM</th>
+            </tr>
+          </thead>
+          <tbody>
+            {table.map((r, idx) => {
+              const isLast = idx === table.length - 1;
+              return (
+                <tr>
+                  <td class="py-4 px-3 font-medium text-gray-300 border-t border-white/[0.06]">{r.dim}</td>
+                  <!-- Pinpoint First Data Column -->
+                  <td
+                    class={`py-4 px-4 bg-[#0F1115] text-white font-medium border-x border-x-white/[0.08] ${
+                      isLast ? 'rounded-b-xl border-b border-b-white/[0.08]' : ''
+                    }`}
+                  >
+                    {r.d}
+                  </td>
+                  <td class="py-4 px-3 text-gray-400 border-t border-white/[0.06]">{r.t}</td>
+                  <td class="py-4 px-3 text-gray-400 border-t border-white/[0.06]">{r.p}</td>
+                  <td class="py-4 px-3 text-gray-400 border-t border-white/[0.06]">{r.a}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <p class="mt-6 text-xs text-gray-600">
@@ -87,36 +99,44 @@ const table = [
 </section>
 
 <section id="docs" class="relative py-24">
-  <div class="relative z-10 mx-auto max-w-4xl px-4">
+  <GlowMesh />
+  <div class="relative z-10 mx-auto max-w-4xl px-4 sm:px-6">
     <div class="mx-auto max-w-2xl text-center">
       <p class="text-sm font-medium uppercase tracking-[0.16em] text-brand-accent">04 / Documentation</p>
       <h2 class="mt-4 text-3xl font-semibold tracking-tight text-brand-fg sm:text-4xl">Start profiling in minutes.</h2>
       <p class="mt-4 leading-7 text-brand-muted">Three commands from zero to actionable latency insight.</p>
     </div>
 
-    <div class="mt-14 space-y-3">
+    <!-- Enterprise-grade Responsive Commands Cards -->
+    <div class="mt-14 space-y-4">
       {steps.map((s) => (
-        <div class="group flex items-center justify-between gap-5 rounded-xl border border-white/[0.08] bg-[#0D0F12] p-4 sm:p-5 transition-all duration-200 hover:border-white/[0.16] hover:bg-[#111418]">
-          <div class="flex items-center gap-4 sm:gap-5 min-w-0 flex-1">
-            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-accent/10 font-mono text-sm font-bold text-brand-accent">
-              {s.n}
-            </div>
-            <div class="min-w-0 flex-1 border-l border-white/10 pl-4 sm:pl-5">
-              <p class="text-[11px] font-semibold uppercase tracking-widest text-gray-400">{s.label}</p>
-              <div class="mt-1 flex items-center font-mono text-sm text-gray-100 overflow-x-auto">
-                <span class="mr-2.5 select-none font-medium text-gray-500">$</span>
-                <code class="truncate" set:html={s.html} />
+        <div class="group rounded-xl border border-white/[0.08] bg-[#0D0F12] p-4 sm:p-5 transition-all duration-200 hover:border-white/[0.16] hover:bg-[#111418] shadow-lg">
+          <!-- Top Row: Badge, Label & Copy Action -->
+          <div class="flex items-center justify-between gap-3">
+            <div class="flex items-center gap-3 min-w-0">
+              <div class="flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-lg bg-brand-accent/10 font-mono text-xs sm:text-sm font-bold text-brand-accent">
+                {s.n}
               </div>
+              <p class="text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-gray-400 truncate">
+                {s.label}
+              </p>
             </div>
+
+            <button
+              data-step-copy={s.rawCmd}
+              class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.03] text-gray-400 transition-colors hover:border-white/20 hover:bg-white/10 hover:text-white active:scale-95"
+              title="Copy command"
+              aria-label={`Copy command: ${s.rawCmd}`}
+            >
+              <Copy data-icon-copy strokeWidth={1.5} class="h-3.5 w-3.5" />
+            </button>
           </div>
-          <button
-            data-step-copy={s.rawCmd}
-            class="flex items-center justify-center p-1.5 text-gray-400 transition-colors hover:text-white active:scale-95"
-            title="Copy command"
-            aria-label={`Copy command: ${s.rawCmd}`}
-          >
-            <Copy data-icon-copy strokeWidth={1.5} class="h-3 w-3" />
-          </button>
+
+          <!-- Command Line Container: Full Width, Clean Monospace -->
+          <div class="mt-3 flex items-center rounded-lg border border-white/[0.06] bg-[#07080B] px-3.5 py-2.5 font-mono text-xs sm:text-sm text-gray-100 overflow-x-auto">
+            <span class="mr-2.5 select-none font-medium text-gray-500 shrink-0">$</span>
+            <code class="whitespace-nowrap font-mono leading-relaxed" set:html={s.html} />
+          </div>
         </div>
       ))}
     </div>
@@ -145,14 +165,23 @@ const table = [
         }, 1600);
       });
     });
+
+    // Mobile Swipe Dismiss
+    const scrollContainer = document.getElementById('table-scroll-container');
+    const swipeHint = document.getElementById('table-swipe-hint');
+    if (scrollContainer && swipeHint) {
+      scrollContainer.addEventListener('scroll', () => {
+        swipeHint.classList.add('opacity-0', 'pointer-events-none');
+      }, { once: true });
+    }
   }
   bindStepCopy();
   document.addEventListener('astro:after-swap', bindStepCopy);
 </script>
 
 <section id="benchmarks" class="relative py-12">
-  <div class="mx-auto max-w-4xl px-4">
-    <div class="rounded-lg border border-brand-border bg-brand-card px-6 py-8 md:px-8">
+  <div class="mx-auto max-w-4xl px-4 sm:px-6">
+    <div class="rounded-xl border border-white/[0.08] bg-[#0D0F12] px-6 py-8 md:px-8 shadow-xl">
       <div class="flex flex-col items-center justify-between gap-6 sm:flex-row">
         <div>
           <p class="text-sm font-semibold text-white">Measured overhead</p>
