@@ -61,7 +61,7 @@ import { ArrowRight, Terminal } from 'lucide-react';
             Route latency & percentile rollups
           </h3>
           <p class="mt-3 text-sm leading-relaxed text-gray-400">
-            Understand request performance without heavy tracing on the request path. Percentile rollups compute in the background, never inline.
+            Understand request performance with p95/avg latency and sample counts. Rollups compute on-demand via a single indexed SQL pass, or batched via <code class="text-gray-300">pinpoint:aggregate</code>.
           </p>
           <div class="mt-5">
             <a href="#benchmarks" class="inline-flex items-center gap-1 text-xs font-medium text-brand-accent hover:underline">
@@ -101,10 +101,10 @@ import { ArrowRight, Terminal } from 'lucide-react';
             Source-level context & IDE jump
           </h3>
           <p class="mt-3 text-sm leading-relaxed text-gray-400">
-            Move from a slow route directly to the responsible controller and line number. Diagnostics stay local — no telemetry pipeline, no hosted round trip.
+            Ctrl/⌘-click any route or caller in your terminal to jump directly to the controller method and offending line in VS Code or PhpStorm. Zero telemetry, 100% local.
           </p>
           <div class="mt-5 flex items-center gap-2 text-xs font-mono text-brand-accent">
-            <span>⌘ Click to jump to IDE line</span>
+            <span>vscode:// · phpstorm:// terminal links</span>
           </div>
 
           <!-- Mobile Inline View -->
@@ -112,7 +112,7 @@ import { ArrowRight, Terminal } from 'lucide-react';
             <div class="rounded-lg border border-white/10 bg-[#08090C] p-4 font-mono text-xs text-gray-300">
               <div class="uppercase tracking-wider text-gray-500 text-[11px] border-b border-white/[0.06] pb-2">Source Origin</div>
               <div class="mt-3 text-white font-medium">OrderController.php:84</div>
-              <div class="mt-1 text-gray-400">$order->items</div>
+              <div class="mt-1 text-emerald-400">Suggested: Order::with('items')</div>
             </div>
           </div>
         </div>
@@ -132,7 +132,7 @@ import { ArrowRight, Terminal } from 'lucide-react';
               </div>
               <span class="ml-2 font-mono text-xs font-medium text-gray-400 flex items-center gap-1.5">
                 <Terminal class="h-3.5 w-3.5 text-brand-accent" />
-                <span id="terminal-step-badge">pinpoint:report --live</span>
+                <span id="terminal-step-badge">pinpoint:report --tier=critical</span>
               </span>
             </div>
             
@@ -201,8 +201,8 @@ import { ArrowRight, Terminal } from 'lucide-react';
               </div>
 
               <div class="rounded-lg border border-white/5 bg-white/[0.02] p-3 text-[11px] text-gray-400 flex items-center justify-between">
-                <span>Telemetry flush: <span class="text-gray-200">Deferred background worker</span></span>
-                <span class="text-brand-accent">0% blocking</span>
+                <span>Telemetry flush: <span class="text-gray-200">app()->terminating()</span> (post-response)</span>
+                <span class="text-brand-accent font-medium">0ms TTFB impact</span>
               </div>
             </div>
 
@@ -211,7 +211,7 @@ import { ArrowRight, Terminal } from 'lucide-react';
               <div class="flex items-center justify-between border-b border-white/[0.06] pb-3">
                 <div class="flex items-center gap-2">
                   <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
-                  <span class="font-bold text-white text-sm">Source Origin Traceback</span>
+                  <span class="font-bold text-white text-sm">Source Origin & Deterministic Fix</span>
                 </div>
                 <span class="rounded bg-emerald-500/20 px-2 py-0.5 text-[10px] font-bold text-emerald-400 uppercase tracking-wider">
                   Resolved
@@ -220,8 +220,8 @@ import { ArrowRight, Terminal } from 'lucide-react';
 
               <div class="rounded-xl border border-white/10 bg-black/40 p-4 space-y-2">
                 <div class="flex items-center justify-between text-xs">
-                  <span class="text-gray-400">app/Http/Controllers/OrderController.php</span>
-                  <span class="text-brand-accent font-bold">Line 84</span>
+                  <span class="text-gray-300 font-mono">app/Http/Controllers/OrderController.php:<span class="text-white font-bold">84</span></span>
+                  <span class="rounded bg-sky-500/10 text-sky-300 border border-sky-500/20 px-2 py-0.5 text-[10px] font-mono">vscode:// jump</span>
                 </div>
                 
                 <div class="rounded bg-[#050608] p-3 border border-white/5 text-[11px] space-y-1">
@@ -235,8 +235,8 @@ import { ArrowRight, Terminal } from 'lucide-react';
                 </div>
 
                 <div class="pt-2 flex items-center justify-between text-[11px]">
-                  <span class="text-gray-400">Fix: Add <code class="text-emerald-400 font-bold">with('items')</code> eager-load</span>
-                  <span class="text-brand-accent cursor-pointer hover:underline">⌘ Click to open IDE →</span>
+                  <span class="text-gray-300">Suggested fix: <code class="text-emerald-400 font-bold">Order::with('items')</code></span>
+                  <span class="text-brand-accent cursor-pointer hover:underline">Ctrl/⌘ Click to open IDE →</span>
                 </div>
               </div>
             </div>
@@ -304,9 +304,9 @@ import { ArrowRight, Terminal } from 'lucide-react';
       });
 
       if (stepBadge) {
-        if (stepNum === 1) stepBadge.textContent = 'pinpoint:report --detect-n1';
-        if (stepNum === 2) stepBadge.textContent = 'pinpoint:report --metrics';
-        if (stepNum === 3) stepBadge.textContent = 'pinpoint:report --locate-source';
+        if (stepNum === 1) stepBadge.textContent = 'pinpoint:report --tier=critical';
+        if (stepNum === 2) stepBadge.textContent = 'pinpoint:report --since=30m';
+        if (stepNum === 3) stepBadge.textContent = 'pinpoint:report --route=api.orders';
       }
     }
 
