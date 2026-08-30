@@ -82,9 +82,9 @@ export default function TerminalPreview() {
           </div>
 
           {/* Route table */}
-          <div className="mt-4 overflow-x-auto">
-            <div className="min-w-[520px]">
-              <div className="grid grid-cols-[minmax(0,1.8fr)_85px_85px_120px_70px] sm:grid-cols-[minmax(0,2fr)_95px_95px_130px_75px] items-center gap-4 sm:gap-6 px-3 pb-2 text-[11px] font-semibold uppercase tracking-widest text-gray-500">
+          <div className="mt-4">
+            <div className="sm:min-w-[520px]">
+              <div className="hidden sm:grid sm:grid-cols-[minmax(0,2fr)_95px_95px_130px_75px] items-center gap-4 sm:gap-6 px-3 pb-2 text-[11px] font-semibold uppercase tracking-widest text-gray-500">
                 <div className="text-left">Route</div>
                 <div className="w-full text-right justify-self-end">P95</div>
                 <div className="w-full text-right justify-self-end">Avg</div>
@@ -108,12 +108,36 @@ export default function TerminalPreview() {
                             : 'cursor-default'
                         }`}
                       >
-                        <div className="grid grid-cols-[minmax(0,1.8fr)_85px_85px_120px_70px] sm:grid-cols-[minmax(0,2fr)_95px_95px_130px_75px] items-center gap-4 sm:gap-6 px-3 py-2.5">
+                        {/* Mobile: stacked, route name always fully visible */}
+                        <div className="px-3 py-2.5 sm:hidden">
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="break-all font-mono text-sm font-medium text-white">{r.key}</span>
+                            <span className="flex shrink-0 items-center gap-1.5 font-mono text-xs">
+                              <span className={`h-1.5 w-1.5 rounded-full ${critical ? 'bg-red-400' : 'bg-emerald-400'}`}></span>
+                              <span className={critical ? 'font-medium text-red-300' : 'text-emerald-400'}>{r.status}</span>
+                              {hasDetails && (
+                                <ChevronDown
+                                  className={`h-3.5 w-3.5 text-red-300 transition-transform duration-200 ${
+                                    expanded ? 'rotate-180' : ''
+                                  }`}
+                                />
+                              )}
+                            </span>
+                          </div>
+                          <div className="mt-1.5 flex flex-wrap gap-x-4 gap-y-1 font-mono text-xs">
+                            <span className="text-gray-600">P95 <span className={critical ? 'font-medium text-red-300' : 'text-gray-300'}>{r.p95}</span></span>
+                            <span className="text-gray-600">Avg <span className="text-gray-400">{r.avg}</span></span>
+                            <span className="text-gray-600">N+1 <span className={critical ? 'font-medium text-red-300' : 'text-gray-500'}>{r.dupes}</span></span>
+                          </div>
+                        </div>
+
+                        {/* Desktop: full table grid */}
+                        <div className="hidden px-3 py-2.5 sm:grid sm:grid-cols-[minmax(0,2fr)_95px_95px_130px_75px] sm:items-center sm:gap-6">
                           <div className="flex min-w-0 items-center gap-1.5 font-mono text-sm font-medium text-white text-left">
                             <span className="truncate">{r.key}</span>
                             {hasDetails && (
                               <ChevronDown
-                                className={`h-3.5 w-3.5 -mt-0.5 shrink-0 text-gray-600 transition-transform duration-200 ${
+                                className={`h-3.5 w-3.5 -mt-0.5 shrink-0 text-red-300 transition-transform duration-200 ${
                                   expanded ? 'rotate-180' : ''
                                 }`}
                               />
@@ -136,42 +160,34 @@ export default function TerminalPreview() {
                       </button>
 
                     {expanded && r.pattern && (
-                      <div className="border-t border-white/[0.05] bg-black/30 px-4 py-4">
-                        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-                          {(
-                            [
-                              ['P95', r.p95],
-                              ['Avg', r.avg],
-                              ['Queries', String(r.queries)],
-                              ['Memory', r.mem],
-                            ] as [string, string][]
-                          ).map(([label, value]) => (
-                            <div key={label}>
-                              <p className="text-[11px] uppercase tracking-wider text-gray-500">{label}</p>
-                              <p className="mt-0.5 font-mono text-sm tabular-nums text-white">{value}</p>
-                            </div>
-                          ))}
-                        </div>
+                      <div className="border-t border-white/[0.05] bg-black/30 px-3 py-4 sm:px-4">
+                        <p className="text-xs font-semibold text-white">What Pinpoint found</p>
+                        <p className="mt-1 text-xs leading-relaxed text-gray-400">
+                          The same query ran <span className="font-mono font-medium text-red-300">{r.dupes}</span> in one request — an N+1.
+                          The loop hits the database again for every item instead of loading them all at once.
+                        </p>
 
-                        <div className="mt-4">
-                          <p className="text-[11px] uppercase tracking-wider text-gray-500">Query pattern</p>
-                          <pre className="mt-1.5 overflow-x-auto rounded-md border border-white/[0.06] bg-black/40 p-2.5 font-mono text-xs text-gray-300">{r.pattern}</pre>
-                          <p className="mt-1.5 text-xs text-gray-500">
-                            <span className="font-mono text-gray-300">{r.dupes}</span> {r.execs}
-                          </p>
-                        </div>
+                        <p className="mt-3.5 text-[11px] uppercase tracking-wider text-gray-500">The repeated query</p>
+                        <pre className="mt-1.5 overflow-x-auto rounded-md border border-white/[0.06] bg-black/40 p-2.5 font-mono text-xs text-gray-300">{r.pattern}</pre>
 
-                        <div className="mt-4 flex items-center justify-between">
-                          <div>
-                            <p className="text-[11px] uppercase tracking-wider text-gray-500">Source</p>
-                            <p className="font-mono text-xs text-gray-200">{r.source}</p>
+                        <div className="mt-3.5 flex items-center justify-between gap-3">
+                          <div className="min-w-0">
+                            <p className="text-[11px] uppercase tracking-wider text-gray-500">Where to fix it</p>
+                            <p className="truncate font-mono text-xs text-gray-200">{r.source}</p>
                           </div>
                           <button
                             onClick={() => setView('source')}
-                            className="flex items-center gap-1 text-xs text-brand-accent hover:underline"
+                            className="flex shrink-0 items-center gap-1 text-xs text-brand-accent hover:underline"
                           >
                             View source <ArrowRight className="h-3 w-3" />
                           </button>
+                        </div>
+
+                        <div className="mt-3.5 flex flex-nowrap items-baseline gap-x-2.5 border-t border-white/[0.05] pt-3 text-[11px]">
+                          <span className="whitespace-nowrap text-gray-500">P95 <span className="font-mono tabular-nums text-gray-200">{r.p95}</span></span>
+                          <span className="whitespace-nowrap text-gray-500">Avg <span className="font-mono tabular-nums text-gray-200">{r.avg}</span></span>
+                          <span className="whitespace-nowrap text-gray-500">Queries <span className="font-mono tabular-nums text-gray-200">{r.queries}</span></span>
+                          <span className="whitespace-nowrap text-gray-500">Memory <span className="font-mono tabular-nums text-gray-200">{r.mem}</span></span>
                         </div>
                       </div>
                     )}

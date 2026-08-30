@@ -185,8 +185,11 @@ const table = [
     <div class="rounded-xl border border-white/[0.08] bg-[#0D0F12] px-6 py-8 md:px-8 shadow-xl">
       <div class="flex flex-col items-center justify-between gap-6 sm:flex-row">
         <div>
-          <p class="text-sm font-semibold text-white">Measured overhead</p>
-          <p class="mt-1 text-sm text-gray-300">Deferred flush keeps users off the critical path.</p>
+          <p class="text-sm font-semibold text-white">What Pinpoint adds to each request</p>
+          <p class="mt-1 text-sm text-brand-muted">
+            Recording runs <span class="text-gray-200">after your response is sent</span>, not during it.
+            A 1,420 ms route measures 1,420.29 ms with Pinpoint on — a difference users never feel.
+          </p>
         </div>
         <div class="flex items-center gap-10">
           <div class="flex flex-col items-center">
