@@ -9,23 +9,23 @@ import { ArrowRight, Terminal } from 'lucide-react';
     <div class="mx-auto max-w-2xl text-center">
       <p class="text-sm font-medium uppercase tracking-[0.16em] text-brand-accent">01 / Core Capabilities</p>
       <h2 class="mt-4 text-3xl font-semibold tracking-tight text-brand-fg sm:text-4xl">
-        One report. Every problem, ready to fix.
+        Runtime visibility without the runtime tax.
       </h2>
       <p class="mt-4 leading-7 text-brand-muted">
-        Instead of digging through a web dashboard, you get three plain answers: what's slow, what's N+1, and where the fix goes.
+        Pinpoint connects runtime signals directly to the source lines responsible for them.
       </p>
     </div>
 
     <!-- Scrollytelling Container -->
     <div class="mt-16 grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-10 items-start">
       <!-- Left Column: Scroll Triggers (5 cols on lg) -->
-      <div class="space-y-24 lg:col-span-5 lg:py-8" id="scrolly-steps">
+      <div class="space-y-6 lg:col-span-5 lg:py-4" id="scrolly-steps">
         
-        <!-- Step 01: Detect -->
-        <div class="scrolly-step group rounded-2xl border border-white/[0.08] bg-[#0D0F12] p-6 sm:p-8 transition-all duration-300 hover:border-white/[0.18]" data-step="1">
+        <!-- Step 01: Detect (Active by default) -->
+        <div class="scrolly-step active group cursor-pointer rounded-2xl border border-white/20 border-l-2 border-l-brand-accent bg-[#111418] p-6 sm:p-8 transition-all duration-300 opacity-100 shadow-xl" data-step="1">
           <div class="flex items-center gap-3">
-            <span class="step-num flex h-7 w-7 items-center justify-center rounded-md bg-brand-accent/15 font-mono text-xs font-bold text-brand-accent">01</span>
-            <span class="text-xs font-semibold uppercase tracking-[0.14em] text-gray-400">Detect</span>
+            <span class="step-num flex h-7 w-7 items-center justify-center rounded-md bg-brand-accent/20 font-mono text-xs font-bold text-brand-accent">01</span>
+            <span class="text-xs font-semibold uppercase tracking-[0.14em] text-gray-300">Detect</span>
           </div>
           <h3 class="mt-4 text-xl font-bold tracking-tight text-white">
             N+1 and query anomalies
@@ -52,7 +52,7 @@ import { ArrowRight, Terminal } from 'lucide-react';
         </div>
 
         <!-- Step 02: Measure -->
-        <div class="scrolly-step group rounded-2xl border border-white/[0.08] bg-[#0D0F12] p-6 sm:p-8 transition-all duration-300 hover:border-white/[0.18]" data-step="2">
+        <div class="scrolly-step group cursor-pointer rounded-2xl border border-white/[0.08] border-l-2 border-l-transparent bg-[#0D0F12] p-6 sm:p-8 transition-all duration-300 opacity-60 hover:opacity-100" data-step="2">
           <div class="flex items-center gap-3">
             <span class="step-num flex h-7 w-7 items-center justify-center rounded-md bg-white/[0.05] font-mono text-xs font-bold text-gray-400">02</span>
             <span class="text-xs font-semibold uppercase tracking-[0.14em] text-gray-400">Measure</span>
@@ -92,7 +92,7 @@ import { ArrowRight, Terminal } from 'lucide-react';
         </div>
 
         <!-- Step 03: Locate -->
-        <div class="scrolly-step group rounded-2xl border border-white/[0.08] bg-[#0D0F12] p-6 sm:p-8 transition-all duration-300 hover:border-white/[0.18]" data-step="3">
+        <div class="scrolly-step group cursor-pointer rounded-2xl border border-white/[0.08] border-l-2 border-l-transparent bg-[#0D0F12] p-6 sm:p-8 transition-all duration-300 opacity-60 hover:opacity-100" data-step="3">
           <div class="flex items-center gap-3">
             <span class="step-num flex h-7 w-7 items-center justify-center rounded-md bg-white/[0.05] font-mono text-xs font-bold text-gray-400">03</span>
             <span class="text-xs font-semibold uppercase tracking-[0.14em] text-gray-400">Locate</span>
@@ -120,8 +120,8 @@ import { ArrowRight, Terminal } from 'lucide-react';
       </div>
 
       <!-- Right Column: Sticky Terminal Panel (7 cols on lg, Desktop Only) -->
-      <div class="hidden lg:block lg:col-span-7 lg:sticky lg:top-28">
-        <div class="overflow-hidden rounded-2xl border border-white/10 bg-[#08090C] shadow-[0_16px_48px_rgba(0,0,0,0.6)]">
+      <div class="hidden lg:block lg:col-span-7 lg:sticky lg:top-24">
+        <div class="overflow-hidden rounded-2xl border border-white/15 bg-[#08090C] shadow-[0_24px_70px_rgba(0,0,0,0.85)] ring-1 ring-white/5">
           <!-- Window Chrome Top Bar -->
           <div class="flex items-center justify-between border-b border-white/[0.08] bg-[#0C0E12] px-4 py-3">
             <div class="flex items-center gap-3">
@@ -277,16 +277,16 @@ import { ArrowRight, Terminal } from 'lucide-react';
         const num = Number(s.getAttribute('data-step'));
         const badge = s.querySelector('.step-num');
         if (num === stepNum) {
-          s.classList.add('border-brand-accent/40', 'bg-[#111418]');
-          s.classList.remove('border-white/[0.08]', 'bg-[#0D0F12]');
+          s.classList.add('border-white/20', 'border-l-brand-accent', 'bg-[#111418]', 'opacity-100', 'shadow-xl');
+          s.classList.remove('border-white/[0.08]', 'border-l-transparent', 'bg-[#0D0F12]', 'opacity-60');
           if (badge) {
             badge.classList.add('bg-brand-accent/20', 'text-brand-accent');
             badge.classList.remove('bg-white/[0.05]', 'text-gray-400');
           }
         } else {
-          s.classList.remove('border-brand-accent/40', 'bg-[#111418]');
-          s.classList.add('border-white/[0.08]', 'bg-[#0D0F12]');
-          if (badge && num !== 1) {
+          s.classList.remove('border-white/20', 'border-l-brand-accent', 'bg-[#111418]', 'opacity-100', 'shadow-xl');
+          s.classList.add('border-white/[0.08]', 'border-l-transparent', 'bg-[#0D0F12]', 'opacity-60');
+          if (badge) {
             badge.classList.remove('bg-brand-accent/20', 'text-brand-accent');
             badge.classList.add('bg-white/[0.05]', 'text-gray-400');
           }
@@ -309,6 +309,14 @@ import { ArrowRight, Terminal } from 'lucide-react';
         if (stepNum === 3) stepBadge.textContent = 'pinpoint:report --locate-source';
       }
     }
+
+    // Click listener on Cards themselves
+    steps.forEach((step) => {
+      step.addEventListener('click', () => {
+        const num = Number(step.getAttribute('data-step'));
+        if (num) setActiveStep(num);
+      });
+    });
 
     // Click listener on Tab Buttons
     tabBtns.forEach((btn) => {

@@ -24,12 +24,12 @@ const steps = [
 ];
 
 const table = [
-  { dim: 'Focus', d: 'Route & N+1 latency', t: 'General debugger', p: 'Server health', a: 'Deep profiler' },
-  { dim: 'N+1 precision', d: 'Exact relation', t: 'Manual query counts', p: 'Aggregate counts', a: 'Call graph' },
-  { dim: 'Source location', d: 'Exact file & line', t: '—', p: '—', a: '—' },
-  { dim: 'Execution context', d: 'CLI & native IDE', t: 'Web dashboard', p: 'Live dashboard', a: 'Cloud SaaS' },
-  { dim: 'Telemetry residency', d: 'Local-only', t: 'In-app', p: 'In-app', a: 'External' },
-  { dim: 'Request overhead', d: 'Benchmark-backed', t: 'High', p: 'Low', a: 'Varies' },
+  { dim: 'Primary focus', d: 'Route & N+1 latency', t: 'General debugger', p: 'Server health', a: 'Deep profiler' },
+  { dim: 'N+1 query precision', d: 'Exact relation & model', t: 'Manual query counts', p: 'Aggregate counts', a: 'Call graph' },
+  { dim: 'Source line traceback', d: 'Exact file and line', t: '—', p: '—', a: '—' },
+  { dim: 'Execution environment', d: 'CLI and native IDE', t: 'Web dashboard', p: 'Live dashboard', a: 'Cloud SaaS' },
+  { dim: 'Telemetry residency', d: 'Local machine only', t: 'In-app database', p: 'In-app database', a: 'External cloud' },
+  { dim: 'Request overhead', d: '0.29ms mean (deferred)', t: 'High blocking', p: 'Low blocking', a: 'Varies by agent' },
 ];
 ---
 
@@ -57,8 +57,8 @@ const table = [
           <thead>
             <tr class="text-left text-xs uppercase tracking-wider">
               <th class="py-4 px-3 font-medium text-gray-400 border-b border-white/10"></th>
-              <!-- Pinpoint First (Highlighted Column) -->
-              <th class="py-4 px-4 font-bold text-white bg-[#0F1115] border-x border-t-2 border-x-white/[0.08] border-t-brand-accent rounded-t-xl shadow-[0_-4px_16px_rgba(245,48,3,0.15)] text-sm normal-case">
+              <!-- Pinpoint First (Continuous Highlighted Surface) -->
+              <th class="py-4 px-4 font-bold text-white bg-[#0F1115] border-x border-t-2 border-x-white/[0.12] border-t-brand-accent rounded-t-xl shadow-[0_-4px_16px_rgba(245,48,3,0.15)] text-sm normal-case">
                 Pinpoint
               </th>
               <th class="py-4 px-3 font-semibold text-white border-b border-white/10 text-sm normal-case">Telescope</th>
@@ -72,10 +72,10 @@ const table = [
               return (
                 <tr>
                   <td class="py-4 px-3 font-medium text-gray-300 border-t border-white/[0.06]">{r.dim}</td>
-                  <!-- Pinpoint First Data Column -->
+                  <!-- Pinpoint Continuous Column (Seamless without interior cuts) -->
                   <td
-                    class={`py-4 px-4 bg-[#0F1115] text-white font-medium border-x border-x-white/[0.08] ${
-                      isLast ? 'rounded-b-xl border-b border-b-white/[0.08]' : ''
+                    class={`py-4 px-4 bg-[#0F1115] text-white font-medium border-x border-x-white/[0.12] ${
+                      isLast ? 'rounded-b-xl border-b border-b-white/[0.12]' : ''
                     }`}
                   >
                     {r.d}
@@ -107,7 +107,7 @@ const table = [
       <p class="mt-4 leading-7 text-gray-300">Install, migrate, run your app. Then one command tells you what's slow.</p>
     </div>
 
-    <!-- Enterprise-grade Clean Commands Cards -->
+    <!-- Enterprise-grade Clean Commands Cards (Matching Max Width) -->
     <div class="mt-14 space-y-4">
       {steps.map((s) => (
         <div class="group rounded-xl border border-white/[0.09] bg-[#0D0F12] p-4 sm:p-5 transition-all duration-200 hover:border-white/[0.18] hover:bg-[#101317] shadow-xl">

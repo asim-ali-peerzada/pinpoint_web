@@ -9,28 +9,47 @@ import GlowMesh from '../ui/GlowMesh.astro';
       03 / CI Regression Gate
     </p>
 
-    <!-- Punchy Terminal Failure Block -->
-    <div class="mx-auto mt-8 max-w-2xl overflow-hidden rounded-xl border border-white/10 bg-[#08090C] shadow-[0_16px_48px_rgba(0,0,0,0.6)] text-left font-mono text-xs sm:text-sm">
-      <div class="flex items-center gap-2 border-b border-white/[0.08] bg-[#0C0E12] px-4 py-2.5">
-        <div class="h-2.5 w-2.5 rounded-full bg-[#EC6A5E]/80"></div>
-        <div class="h-2.5 w-2.5 rounded-full bg-[#F5BF4F]/80"></div>
-        <div class="h-2.5 w-2.5 rounded-full bg-[#62C554]/80"></div>
-        <span class="ml-2 text-xs text-gray-500 font-sans">GitHub Actions • Terminal</span>
-      </div>
-      <div class="p-5 sm:p-6 space-y-3 leading-relaxed">
-        <div class="text-gray-400">
-          <span class="text-gray-500 select-none">$ </span>
-          <span class="text-white font-medium">php artisan pinpoint:check --fail-on-n1</span>
+    <!-- Punchy Terminal Failure Block with Header Outcome Badge -->
+    <div class="mx-auto mt-8 max-w-2xl overflow-hidden rounded-2xl border border-white/15 bg-[#08090C] shadow-[0_24px_70px_rgba(0,0,0,0.85)] ring-1 ring-white/5 text-left font-mono text-xs sm:text-sm">
+      <div class="flex items-center justify-between border-b border-white/[0.08] bg-[#0C0E12] px-4 py-3">
+        <div class="flex items-center gap-2">
+          <div class="h-2.5 w-2.5 rounded-full bg-[#EC6A5E]/80"></div>
+          <div class="h-2.5 w-2.5 rounded-full bg-[#F5BF4F]/80"></div>
+          <div class="h-2.5 w-2.5 rounded-full bg-[#62C554]/80"></div>
+          <span class="ml-2 text-xs text-gray-400 font-sans">GitHub Actions • Terminal</span>
         </div>
-        <div class="pt-2 text-rose-400 font-bold flex items-center gap-2">
+
+        <!-- Explicit Status Badge in Header -->
+        <span class="rounded bg-rose-500/20 px-2.5 py-0.5 font-mono text-[11px] font-bold uppercase tracking-wider text-rose-400 border border-rose-500/30">
+          Exit 1 • Check Blocked
+        </span>
+      </div>
+
+      <div class="p-5 sm:p-6 space-y-3 leading-relaxed">
+        <div class="text-gray-300">
+          <span class="text-gray-500 select-none font-medium">$ </span>
+          <span class="text-brand-accent font-semibold">php artisan</span>
+          <span class="text-white font-medium"> pinpoint:check</span>
+          <span class="text-gray-400"> --fail-on-n1</span>
+        </div>
+
+        <div class="pt-2 text-rose-400 font-bold flex items-center gap-2 text-sm">
           <span>✗ FAIL</span>
           <span class="text-white">api.orders.index</span>
         </div>
-        <div class="pl-4 border-l-2 border-rose-500/40 text-gray-300 space-y-1">
-          <div class="text-rose-300 font-medium">1x N+1 · Order::items() · app/Http/Controllers/OrderController.php:34</div>
+
+        <div class="pl-4 border-l-2 border-rose-500/50 bg-rose-950/20 rounded-r-lg p-3 space-y-1">
+          <div class="text-rose-300 font-medium">
+            <span class="text-rose-400 font-bold">1x N+1</span> · <code class="text-white">Order::items()</code>
+          </div>
+          <div class="text-gray-400 text-xs">
+            Trigger: <span class="text-gray-200">app/Http/Controllers/OrderController.php:34</span>
+          </div>
         </div>
-        <div class="text-gray-500 text-xs pt-2">
-          exit 1
+
+        <div class="pt-2 text-xs text-gray-500 flex items-center justify-between border-t border-white/5">
+          <span>Process completed with exit code <strong class="text-rose-400">1</strong>.</span>
+          <span class="text-gray-600">0.14s total</span>
         </div>
       </div>
     </div>
