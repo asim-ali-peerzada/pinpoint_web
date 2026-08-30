@@ -13,8 +13,8 @@ export default {
           'border-active': '#2F3339',
           accent: '#F53003',
           'accent-glow': 'rgba(245, 48, 3, 0.15)',
-          muted: '#A1A1AA',
-          fg: '#F5F5F5',
+          muted: '#CBD5E1', // Upgraded to Slate-300 for 11.5:1 WCAG AAA contrast
+          fg: '#F8FAFC',
           success: '#3FB950',
           warning: '#D29922',
         }

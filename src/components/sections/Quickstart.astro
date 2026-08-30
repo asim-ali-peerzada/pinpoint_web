@@ -1,5 +1,6 @@
 ---
 import GlowMesh from '../ui/GlowMesh.astro';
+import Button from '../ui/Button.astro';
 import { Copy } from 'lucide-react';
 
 const steps = [
@@ -24,12 +25,12 @@ const steps = [
 ];
 
 const table = [
-  { dim: 'Primary focus', d: 'Route & N+1 latency', t: 'General debugger', p: 'Server health', a: 'Deep profiler' },
-  { dim: 'N+1 query precision', d: 'Exact relation & model', t: 'Manual query counts', p: 'Aggregate counts', a: 'Call graph' },
-  { dim: 'Source line traceback', d: 'Exact file and line', t: '—', p: '—', a: '—' },
-  { dim: 'Execution environment', d: 'CLI and native IDE', t: 'Web dashboard', p: 'Live dashboard', a: 'Cloud SaaS' },
-  { dim: 'Telemetry residency', d: 'Local machine only', t: 'In-app database', p: 'In-app database', a: 'External cloud' },
-  { dim: 'Request overhead', d: '0.29ms mean (deferred)', t: 'High blocking', p: 'Low blocking', a: 'Varies by agent' },
+  { dim: 'Primary focus', d: 'Route & N+1 latency', t: 'General debug assistant', p: 'Server health & queues', a: 'Distributed APM profiling' },
+  { dim: 'N+1 query precision', d: 'Exact relation & model', t: 'Manual query count logs', p: 'Aggregate slow query list', a: 'Call tree & span waterfall' },
+  { dim: 'Source line traceback', d: 'Exact file and line', t: 'Backtrace in web modal', p: '—', a: 'Stack trace on slow span' },
+  { dim: 'Execution environment', d: 'CLI and native IDE', t: 'Local web dashboard', p: 'Central web dashboard', a: 'Cloud SaaS interface' },
+  { dim: 'Telemetry residency', d: 'Local machine only', t: 'In-app database', p: 'Redis / app database', a: 'External third-party cloud' },
+  { dim: 'Request overhead', d: '0.29ms mean (deferred)', t: 'High (inline event recording)', p: 'Low (sampled)', a: 'Medium–High (agent tracing)' },
 ];
 ---
 
@@ -91,19 +92,36 @@ const table = [
       </div>
     </div>
 
-    <p class="mt-6 text-xs text-gray-600">
+    <p class="mt-4 text-xs text-gray-500">
       Capabilities cross-referenced against current stable releases. Verify on your own stack —
       that's the point.
     </p>
+
+    <!-- Post-Comparison Decision CTA -->
+    <div class="mt-12 flex flex-col sm:flex-row items-center justify-between gap-6 rounded-2xl border border-white/10 bg-[#0A0C10] p-6 sm:p-8 shadow-2xl">
+      <div>
+        <h3 class="text-base sm:text-lg font-semibold text-white">Ready to profile your routes locally?</h3>
+        <p class="mt-1 text-xs sm:text-sm text-gray-400">Zero telemetry, zero dashboard overhead. Up and running in 60 seconds.</p>
+      </div>
+      <div class="flex items-center gap-3 shrink-0">
+        <Button href="#docs" size="sm" variant="primary">
+          Get started <span class="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+        </Button>
+        <Button href="https://github.com/asim-ali-peerzada/pinpoint" target="_blank" rel="noopener" variant="secondary" size="sm">
+          View source
+        </Button>
+      </div>
+    </div>
+
   </div>
 </section>
 
 <section id="docs" class="relative py-24">
   <GlowMesh />
-  <div class="relative z-10 mx-auto max-w-4xl px-4 sm:px-6">
+  <div class="mx-auto max-w-4xl px-4 sm:px-6">
     <div class="mx-auto max-w-2xl text-center">
       <p class="text-sm font-medium uppercase tracking-[0.16em] text-brand-accent">04 / Documentation</p>
-      <h2 class="mt-4 text-3xl font-semibold tracking-tight text-brand-fg sm:text-4xl">Start profiling in minutes.</h2>
+      <h2 class="mt-4 text-3xl font-semibold tracking-tight text-brand-fg sm:text-4xl">Get started in minutes.</h2>
       <p class="mt-4 leading-7 text-gray-300">Install, migrate, run your app. Then one command tells you what's slow.</p>
     </div>
 
