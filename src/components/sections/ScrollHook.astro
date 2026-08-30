@@ -6,14 +6,26 @@
   <div class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 h-32 w-full max-w-3xl bg-brand-accent/[0.04] blur-[80px]"></div>
 
   <div class="mx-auto max-w-4xl px-4 text-center">
-    <div class="inline-flex flex-wrap items-center justify-center gap-4 sm:gap-8 font-mono text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight">
-      <span class="text-red-500 line-through decoration-red-500/70 tabular-nums">1420ms</span>
+    <p class="font-mono text-sm text-gray-500">GET api/orders.index</p>
+
+    <div class="mt-4 inline-flex flex-wrap items-center justify-center gap-4 sm:gap-8 font-mono text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight">
+      <span class="text-rose-400/80 line-through decoration-rose-500/60 tabular-nums">1420ms</span>
       <span class="text-brand-accent text-3xl sm:text-5xl font-light select-none">→</span>
       <span class="text-emerald-400 tabular-nums">89ms</span>
     </div>
-    
-    <p class="mt-6 text-lg sm:text-2xl font-medium text-gray-200 tracking-tight">
-      Same route. One line to fix. Found from your terminal — not by clicking through a dashboard.
+
+    <div class="mt-4 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
+      <span class="rounded bg-rose-500/15 px-2.5 py-1 font-mono text-[11px] font-bold uppercase tracking-wider text-rose-400">Critical</span>
+      <span class="rounded bg-emerald-500/15 px-2.5 py-1 font-mono text-[11px] font-bold uppercase tracking-wider text-emerald-400">Good</span>
+      <span class="ml-1 font-mono text-xs text-gray-400 sm:text-sm">42 queries → 3 queries</span>
+    </div>
+
+    <p class="mx-auto mt-6 max-w-2xl text-base sm:text-lg font-medium text-gray-300 tracking-tight">
+      Same route, one eager-load fix —
+      <code class="rounded bg-white/[0.06] px-1.5 py-0.5 font-mono text-[0.85em] text-emerald-300">Order::with('items')</code>
+      — found from
+      <code class="rounded bg-white/[0.06] px-1.5 py-0.5 font-mono text-[0.85em] text-brand-accent">pinpoint:report</code>,
+      not a dashboard click-through.
     </p>
   </div>
 </section>
