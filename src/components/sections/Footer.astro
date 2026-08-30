@@ -1,5 +1,19 @@
 ---
 import { ArrowUpRight, Github } from 'lucide-react';
+import { execSync } from 'node:child_process';
+
+// Version baked at build time — refreshed live from GitHub tags by the
+// script below. The static value guarantees something correct on first
+// paint / offline; the fetch overwrites it when a newer tag exists.
+let version = 'latest release';
+
+try {
+    version = execSync('git describe --tags --abbrev=0', { cwd: new URL('../../../..', import.meta.url).pathname })
+        .toString()
+        .trim();
+} catch {
+    // not in a git checkout — keep the neutral fallback
+}
 
 const navigation = {
   highlights: [
@@ -48,9 +62,18 @@ const navigation = {
           </span>
         </div>
         <span class="font-display text-xl font-bold tracking-tight text-white">Pinpoint</span>
-        <span class="rounded-full border border-white/10 bg-white/[0.05] px-2.5 py-0.5 font-mono text-[11px] font-medium text-gray-300">
-          v1.0.0 Stable
+        <span
+          id="pinpoint-version"
+          class="rounded-full border border-white/10 bg-white/[0.05] px-2.5 py-0.5 font-mono text-[11px] font-medium text-gray-300"
+        >
+          {version} Stable
         </span>
+        <a
+          href="https://github.com/asim-ali-peerzada/pinpoint/releases"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-[11px] text-gray-500 transition-colors duration-150 hover:text-gray-300"
+        >Releases on GitHub</a>
       </div>
 
       <!-- Constrained paragraph block -->
@@ -152,3 +175,24 @@ const navigation = {
     </div>
   </div>
 </footer>
+
+<script>
+  // Live version from GitHub tags — if a newer tag exists than the one baked
+  // into the build, overwrite it. No GitHub Releases are created (only tags),
+  // so /releases/latest would 404 — the tags endpoint always works.
+  const el = document.getElementById('pinpoint-version');
+
+  if (el) {
+    const cooked = el.textContent.trim();
+
+    fetch('https://api.github.com/repos/asim-ali-peerzada/pinpoint/tags?per_page=1')
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then((tags) => {
+        if (Array.isArray(tags) && tags[0]?.name) {
+          const latest = tags[0].name + ' Stable';
+          if (latest !== cooked) el.textContent = latest;
+        }
+      })
+      .catch(() => {});
+  }
+</script>
